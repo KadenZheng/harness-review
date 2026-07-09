@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "dir": "~/harness/runs/run-20260708-cycle1/candidates/c0001",
+      "has_patch": true,
+      "id": "c0001",
+      "locked_hint": true,
+      "path": "~/harness/runs/run-20260708-cycle1/candidates/c0001/candidate.md",
+      "pending": false,
+      "slug": "c0001-phantom-launch-parser",
+      "status": "PROMOTED 2026-07-08 (see decision.md)",
+      "target": "`rb log-launch` mints phantom LAUNCH rows when a non-sbatch command's stdout starts with digits. 14 production instances across two repos (looping_machines e0083, e0202, e0368, e0627, e1169, e1206, e1291, e1313, e1349; neuromodulated_recurrence e0004, e0020, e0169, e0182, e0185).",
+      "validation": "- Held-in T01: baseline FAIL (\"4 spurious rows\") \u2192 patched PASS (rc=0). - Held-out H01: baseline FAIL (\"3 spurious rows\") \u2192 patched PASS (rc=0). CAVEAT: the same agent authored H01 earlier in this session (fresh-proposer separation not yet in effect for cycle 1; the user directed"
+    },
+    {
+      "dir": "~/harness/runs/run-20260708-cycle2/candidates/c0002",
+      "has_patch": false,
+      "id": "c0002",
+      "locked_hint": true,
+      "path": "~/harness/runs/run-20260708-cycle2/candidates/c0002/candidate.md",
+      "pending": false,
+      "slug": "c0002-ledger-guard-launcher-grace",
+      "status": "PROMOTED 2026-07-08 (promotion = the user's explicit request to resolve the issue)",
+      "target": "Every Stop after launching a Dynamic Workflow raised \"Stop hook error: LEDGER GUARD: .workflow/LEDGER.md still has N open item(s)\" in the LAUNCHING session \u2014 by design the ledger was just written and the workflow is still running, so the nag is pure noise at exactly the moment th",
+      "validation": "- Plugin test suite: 43/43 (34 original + 9 new launcher-grace tests incl. crash-stale re-engagement, env-tunable windows, corrupt state, wrong-ledger state, short-spawn no-record). Run via `uv run --with pytest --python 3.12 -m pytest tests/`. - Live-cache end-to-end: greedy_loo"
+    },
+    {
+      "dir": "~/harness/runs/run-20260708-cycle3/candidates/c0003",
+      "has_patch": false,
+      "id": "c0003",
+      "locked_hint": true,
+      "path": "~/harness/runs/run-20260708-cycle3/candidates/c0003/candidate.md",
+      "pending": false,
+      "slug": "c0003-scheduled-dream-sweep",
+      "status": "PROMOTED 2026-07-08 (user-directed)",
+      "target": "Auto-memory stores accrete without consolidation: three stores were flagged due by the evaluator (26/16/13 topic files, none ever dreamed) and the skill's own trigger relied on someone noticing. Stale memory is the false-recall class the harness works to kill.",
+      "validation": "- `--dry-run`: correct decisions on all three due stores \u2014 2 skipped as live (sessions 4/2 min old), 1 selected (dormant-session store, 480h). - Real run (job output `runs/dream-sweep-20260708-1848.md`): the legacy `looping_machines` store (16 files) dreamed clean in ~9 min \u2014 4 p"
+    },
+    {
+      "dir": "~/harness/runs/run-20260709-cycle4/candidates/c0004",
+      "has_patch": true,
+      "id": "c0004",
+      "locked_hint": true,
+      "path": "~/harness/runs/run-20260709-cycle4/candidates/c0004/candidate.md",
+      "pending": false,
+      "slug": "c0004-rb-launch-enrichment-and-verify-number",
+      "status": "PROMOTED 2026-07-09 (see decision.md)",
+      "target": "1. **launch-enrichment** \u2014 the largest uncovered CORRECT class: 25 rows across two repos exist only to manually add config/seed/partition that `rb log-launch` missed (e1057, e1061, e1063, e0033, e0065, e0027, e0048...). 2. **wrong-number** \u2014 8 CORRECT rows for misstated numbers/s",
+      "validation": "Held-in: 3 enrichment fixtures (env-prefix, flags+array, bare-sbatch no-crash) + T01. Held-out: H01. Regression: `rb selftest` (52+ checks) with the patched kit. verify-number: rounded-found / exact-found / absent-not-found."
+    },
+    {
+      "dir": "~/harness/runs/run-20260709-cycle4/candidates/c0005",
+      "has_patch": false,
+      "id": "c0005",
+      "locked_hint": true,
+      "path": "~/harness/runs/run-20260709-cycle4/candidates/c0005/candidate.md",
+      "pending": false,
+      "slug": "c0005-per-repo-command-guard",
+      "status": "PROMOTED 2026-07-09 (see decision.md)",
+      "target": "The re-learned-every-session env/test footgun class: Codex memories re-encode \"bare pytest is misleading in looping_machines\" and the greedy_loops login-node test footgun across \u22656 sessions; the knowledge lives in AGENTS.md but nothing ENFORCES it, so every fresh session risks re",
+      "validation": "`bash test.sh`: 9 verdict cases (deny\u00d75 incl. subdirectory walk-up and `python -m pytest`; allow\u00d74 incl. authoritative command, non-command-position mention, override, non-opted repo), message content check, fail-open on garbage stdin."
+    },
+    {
+      "dir": "~/harness/runs/run-20260709-cycle4/candidates/c0006",
+      "has_patch": false,
+      "id": "c0006",
+      "locked_hint": true,
+      "path": "~/harness/runs/run-20260709-cycle4/candidates/c0006/candidate.md",
+      "pending": false,
+      "slug": "c0006-post-compaction-skill-reinject",
+      "status": "PROMOTED 2026-07-09 (see decision.md)",
+      "target": "Compaction is core workflow (27 compaction events / 50k sampled transcript lines; 204 `/compact` + 646 `/rewind` commands) and a recorded memory lesson states skill bodies truncate under compaction. research-discipline INSTRUCTS re-reading WORKFLOW.md + REVIEWER.md after compacti",
+      "validation": "`bash test.sh`: 7 cases \u2014 stale-rb startup (lag only), stale-rb compact (both), adapter-repo compact (reminder only), plain-repo compact + startup (silent), fail-open on garbage, JSON schema validity."
+    }
+  ],
+  "digest": {
+    "notes": [
+      "neuromodulated_recurrence: RESEARCH_STATE lags ledger by 25d (state 2026-06-13T14:23-0400, ledger 2026-07-08T17:30-0400)",
+      "-n-home03-kzheng-looping-greedy-loops: 26 topic files, last dream: never",
+      "-n-home03-kzheng-looping-looping-machines: 13 topic files, last dream: never",
+      "-n-home03-kzheng-looping-machines: 16 topic files, last dream: never"
+    ],
+    "path": "~/harness/runs/digest-20260708-1835.md",
+    "signals": "14 rb rows, 6 codex-ledger files, 9 review verdicts, 0 correction memories",
+    "suite": "7 pass, 0 fail, 0 skip",
+    "suite_ok": true
+  },
+  "dream": {
+    "items": [
+      {
+        "id": "dream--n-home03-kzheng-looping-machines-item1",
+        "n": 1,
+        "text": "Account contradiction: `fasrc_reference.md` still lists `kempner_undergrads`; MEMORY.md says it was replaced by `kempner_nsaphra_lab` and gone as of 2026-06-11. Update the reference file?"
+      },
+      {
+        "id": "dream--n-home03-kzheng-looping-machines-item2",
+        "n": 2,
+        "text": "Stale plan file: `phase_1c_eval_plan.md` is a one-shot plan whose window (2026-04-22/24) passed ~11 weeks ago \u2014 superseded / outcome-known / delete?"
+      },
+      {
+        "id": "dream--n-home03-kzheng-looping-machines-item3",
+        "n": 3,
+        "text": "Description-vs-body staleness in `lm_scale_carving_corrected.md`: description still says \"distinct-per-iter is REFUTED\" and \"the open A1 test\", but the body itself corrects both (\"REFUTED is an overclaim \u2014 report nesting as positive evidence\"; \"Sub-question B ANSWERED 2026-06-08\"). Body also still says `carving_distinctness.py` is \"to be written\" while later text treats it as existing. Left as found."
+      },
+      {
+        "id": "dream--n-home03-kzheng-looping-machines-item4",
+        "n": 4,
+        "text": "Naming inconsistency: \"iter-0 redundancy basin\" (`v7_research_orientation.md`, `sparseloop_general_goal.md`) vs \"iter-1 redundancy\" (`v7_stage_b_axes.md` description, MEMORY.md line). Left as found."
+      },
+      {
+        "id": "dream--n-home03-kzheng-looping-machines-item5",
+        "n": 5,
+        "text": "Env-activation tension: MEMORY.md Key Facts activates `$LABDIR/conda_envs/base`; `fasrc_reference.md` points at the (now-missing) looping venv. Possibly both-valid contexts; left as found."
+      },
+      {
+        "id": "dream--n-home03-kzheng-looping-machines-item6",
+        "n": 6,
+        "text": "Successor repo `looping/looping_machines` is rb-managed (has `CHANGELOG.md` + `RESEARCH_STATE.md`): this store predates that; whether its result-bearing files (lm_scale_*, v7_*) should defer to the ledger is a governance question, not this pass's."
+      }
+    ],
+    "report": "~/harness/runs/dream-sweep-20260708-1848.md",
+    "store": "-n-home03-kzheng-looping-machines"
+  },
+  "generated": "2026-07-09 12:58",
+  "generated_iso": "2026-07-09T12:58:35",
+  "pages_url": "https://kadenzheng.github.io/harness-review",
+  "poller": null,
+  "repo": "KadenZheng/harness-review",
+  "schedules": {
+    "digest": "Mon 08:00",
+    "dream": "Sun 05:00",
+    "poller": "every 15m"
+  }
+}
