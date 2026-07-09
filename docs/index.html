@@ -65,8 +65,8 @@
   <div class="banner">
     Decisions queue as GitHub Issues (label <code>harness-decision</code>).
     You must be logged into GitHub in this browser. The FASRC poller applies or
-    refuses them within ~15 minutes when the cluster is awake — not instant remote execution.
-    Locked-surface promotions are refused for interactive apply.
+    refuses them on the next hourly run when the cluster is awake — not instant remote execution.
+    Promotions and dream resolves are refused for interactive apply on the cluster.
   </div>
   <div id="stats" class="stats"></div>
   <div id="pending"></div>
@@ -141,7 +141,7 @@ function render(data) {
 
   document.getElementById("meta").textContent =
     "Generated " + (data.generated || "?") +
-    " · poller " + ((data.schedules && data.schedules.poller) || "every 15m") +
+    " · poller " + ((data.schedules && data.schedules.poller) || "hourly") +
     (poller && poller.at ? " · last poller " + poller.at : " · poller heartbeat: none yet");
 
   const stats = document.getElementById("stats");
@@ -165,7 +165,7 @@ function render(data) {
       pending.map((c) => {
         const hint = c.locked_hint
           ? '<p class="muted">Likely locked-surface — promote may be refused for interactive apply.</p>'
-          : (c.has_patch ? '<p class="muted">Has patch.diff (editable promote may auto-apply).</p>' : "");
+          : (c.has_patch ? '<p class="muted">Has patch.diff — promote still requires interactive apply.</p>' : "");
         return '<div class="card"><h3>' + esc(c.slug) + "</h3>" +
           "<p>" + esc(c.target) + "</p>" +
           (c.validation ? '<p class="muted">Validation: ' + esc(c.validation) + "</p>" : "") +

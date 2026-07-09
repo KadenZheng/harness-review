@@ -93,11 +93,6 @@
         "text": "Account contradiction: `fasrc_reference.md` still lists `kempner_undergrads`; MEMORY.md says it was replaced by `kempner_nsaphra_lab` and gone as of 2026-06-11. Update the reference file?"
       },
       {
-        "id": "dream--n-home03-kzheng-looping-machines-item2",
-        "n": 2,
-        "text": "Stale plan file: `phase_1c_eval_plan.md` is a one-shot plan whose window (2026-04-22/24) passed ~11 weeks ago \u2014 superseded / outcome-known / delete?"
-      },
-      {
         "id": "dream--n-home03-kzheng-looping-machines-item3",
         "n": 3,
         "text": "Description-vs-body staleness in `lm_scale_carving_corrected.md`: description still says \"distinct-per-iter is REFUTED\" and \"the open A1 test\", but the body itself corrects both (\"REFUTED is an overclaim \u2014 report nesting as positive evidence\"; \"Sub-question B ANSWERED 2026-06-08\"). Body also still says `carving_distinctness.py` is \"to be written\" while later text treats it as existing. Left as found."
@@ -121,11 +116,11 @@
     "report": "~/harness/runs/dream-sweep-20260708-1848.md",
     "store": "-n-home03-kzheng-looping-machines"
   },
-  "generated": "2026-07-09 13:15",
-  "generated_iso": "2026-07-09T13:15:28",
+  "generated": "2026-07-09 13:21",
+  "generated_iso": "2026-07-09T13:21:04",
   "pages_url": "https://kadenzheng.github.io/harness-review",
   "poller": {
-    "at": "2026-07-09T13:15:28",
+    "at": "2026-07-09T13:21:04",
     "counts": {
       "applied": 0,
       "dup": 0,
@@ -134,7 +129,7 @@
       "skip": 0,
       "unsupported": 0
     },
-    "host": "holy7c24604.rc.fas.harvard.edu",
+    "host": "holylogin05.rc.fas.harvard.edu",
     "ok": true,
     "open": 0
   },
@@ -142,6 +137,6 @@
   "schedules": {
     "digest": "Mon 08:00",
     "dream": "Sun 05:00",
-    "poller": "every 15m"
+    "poller": "hourly"
   }
 }
