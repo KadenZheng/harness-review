@@ -66,11 +66,6 @@
         "text": "Naming inconsistency: \"iter-0 redundancy basin\" (`v7_research_orientation.md`, `sparseloop_general_goal.md`) vs \"iter-1 redundancy\" (`v7_stage_b_axes.md` description, MEMORY.md line). Left as found."
       },
       {
-        "id": "dream--n-home03-kzheng-looping-machines-item5",
-        "n": 5,
-        "text": "Env-activation tension: MEMORY.md Key Facts activates `$LABDIR/conda_envs/base`; `fasrc_reference.md` points at the (now-missing) looping venv. Possibly both-valid contexts; left as found."
-      },
-      {
         "id": "dream--n-home03-kzheng-looping-machines-item6",
         "n": 6,
         "text": "Successor repo `looping/looping_machines` is rb-managed (has `CHANGELOG.md` + `RESEARCH_STATE.md`): this store predates that; whether its result-bearing files (lm_scale_*, v7_*) should defer to the ledger is a governance question, not this pass's."
@@ -79,12 +74,12 @@
     "store": "-n-home03-kzheng-looping-machines"
   },
   "generated": "2026-07-09 13:58",
-  "generated_iso": "2026-07-09T13:58:23",
+  "generated_iso": "2026-07-09T13:58:30",
   "pages_url": "https://kadenzheng.github.io/harness-review",
   "poller": {
-    "at": "2026-07-09T13:58:21",
+    "at": "2026-07-09T13:58:29",
     "counts": {
-      "applied": 0,
+      "applied": 1,
       "dup": 0,
       "malformed": 0,
       "refuse": 0,
@@ -92,7 +87,7 @@
       "unsupported": 0
     },
     "ok": true,
-    "open": 0,
+    "open": 1,
     "stale": false
   },
   "repo": "KadenZheng/harness-review",
