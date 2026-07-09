@@ -93,16 +93,19 @@ function issueUrl(type, id, verdict, note) {
   const generated = new Date().toISOString().replace(/\.\d{3}Z$/, "");
   const trimmed = (note && note.trim() ? note.trim() : "").slice(0, 300);
   const noteLine = trimmed ? JSON.stringify(trimmed) : '""';
+  // INDEX_HTML is a Python raw string: use \n (one backslash) so JS gets a
+  // real newline escape. "\\n" here would emit a literal backslash-n and the
+  // poller front-matter parser would fail (MALFORMED).
   const body =
-    "---\\n" +
-    "type: " + type + "\\n" +
-    "id: " + id + "\\n" +
-    "verdict: " + verdict + "\\n" +
-    "note: " + noteLine + "\\n" +
-    "source: harness-review-pages\\n" +
-    "generated: " + generated + "\\n" +
-    "---\\n\\n" +
-    "Queued from the harness-review status page. The cluster poller will apply or refuse this decision per governance.\\n";
+    "---\n" +
+    "type: " + type + "\n" +
+    "id: " + id + "\n" +
+    "verdict: " + verdict + "\n" +
+    "note: " + noteLine + "\n" +
+    "source: harness-review-pages\n" +
+    "generated: " + generated + "\n" +
+    "---\n\n" +
+    "Queued from the harness-review status page. The cluster poller will apply or refuse this decision per governance.\n";
   const title = "[harness-decision] " + verdict + " " + id;
   const u = new URL(ISSUES_NEW);
   u.searchParams.set("title", title);
@@ -180,17 +183,15 @@ function render(data) {
   } else {
     pend.innerHTML = "<h2>Candidates awaiting your decision (" + pending.length + ")</h2>" +
       pending.map((c) => {
-        const hint = c.locked_hint
-          ? '<p class="muted">Likely locked-surface — promote may be refused for interactive apply.</p>'
-          : (c.has_patch ? '<p class="muted">Has patch.diff — promote still requires interactive apply.</p>' : "");
+        const hint = '<p class="muted">Promote queues an audit Issue only — the poller always refuses auto-promote; follow the candidate recipe on FASRC, then close the Issue.</p>';
         return '<div class="card"><h3>' + esc(c.slug) + "</h3>" +
           "<p>" + esc(c.target) + "</p>" +
           (c.validation ? '<p class="muted">Validation: ' + esc(c.validation) + "</p>" : "") +
           hint +
           actionRow("candidate", c.id, [
-            ["promote", "Promote", "primary"],
+            ["promote", "Queue promote (interactive)", "warn"],
             ["reject", "Reject", "danger"],
-            ["defer", "Defer", "warn"],
+            ["defer", "Defer", ""],
           ]) + "</div>";
       }).join("");
   }
