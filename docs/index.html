@@ -68,6 +68,7 @@
     refuses them on the next hourly run when the cluster is awake — not instant remote execution.
     Promotions and dream resolves are refused for interactive apply on the cluster.
   </div>
+  <div id="stale" class="banner" style="display:none;background:#3a2a1a;border-color:#7a5a28;color:#f0d9a8;"></div>
   <div id="stats" class="stats"></div>
   <div id="pending"></div>
   <div id="dream"></div>
@@ -90,7 +91,8 @@ function esc(s) {
 
 function issueUrl(type, id, verdict, note) {
   const generated = new Date().toISOString().replace(/\.\d{3}Z$/, "");
-  const noteLine = note && note.trim() ? JSON.stringify(note.trim()) : '""';
+  const trimmed = (note && note.trim() ? note.trim() : "").slice(0, 300);
+  const noteLine = trimmed ? JSON.stringify(trimmed) : '""';
   const body =
     "---\\n" +
     "type: " + type + "\\n" +
@@ -144,6 +146,19 @@ function render(data) {
     " · poller " + ((data.schedules && data.schedules.poller) || "hourly") +
     (poller && poller.at ? " · last poller " + poller.at : " · poller heartbeat: none yet");
 
+  const staleEl = document.getElementById("stale");
+  if (!poller || !poller.at || poller.stale || poller.ok === false) {
+    staleEl.style.display = "block";
+    staleEl.textContent = !poller || !poller.at
+      ? "Poller heartbeat missing — cluster may not be applying decisions."
+      : (poller.ok === false
+          ? "Last poller run failed (" + (poller.at || "?") + "). Check gh auth / PATH on FASRC."
+          : "Poller heartbeat is stale (" + poller.at + "). Expected hourly when the cluster is awake.");
+  } else {
+    staleEl.style.display = "none";
+  }
+
+  const sched = data.schedules || {};
   const stats = document.getElementById("stats");
   if (digest) {
     stats.innerHTML =
@@ -152,7 +167,9 @@ function render(data) {
       '<div class="stat"><div class="label">Signals (8-day)</div>' +
       '<div class="value">' + esc(digest.signals || "none") + "</div></div>" +
       '<div class="stat"><div class="label">Schedules</div>' +
-      '<div class="value">dream Sun 05:00 · digest Mon 08:00</div></div>' +
+      '<div class="value">dream ' + esc(sched.dream || "Sun 05:00") +
+      " · digest " + esc(sched.digest || "Mon 08:00") +
+      " · poller " + esc(sched.poller || "hourly") + "</div></div>" +
       '<div class="stat"><div class="label">Open decisions</div>' +
       '<div class="value">' + pending.length + " candidate(s)</div></div>";
   }

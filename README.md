@@ -6,3 +6,4 @@ Autonomous status page for harness improvement decisions.
 - Published by `~/harness/bin/review-publish` on FASRC
 - Decisions: GitHub Issues labeled `harness-decision`
 - Applied by `~/harness/bin/review-apply-poller`
+- Public by necessity (private Pages unavailable); payload is sanitized
