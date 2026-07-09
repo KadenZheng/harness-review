@@ -63,21 +63,21 @@
     ],
     "store": "-n-home03-kzheng-looping-machines"
   },
-  "generated": "2026-07-09 15:00",
-  "generated_iso": "2026-07-09T15:00:12",
+  "generated": "2026-07-09 16:00",
+  "generated_iso": "2026-07-09T16:00:03",
   "pages_url": "https://kadenzheng.github.io/harness-review",
   "poller": {
-    "at": "2026-07-09T15:00:12",
+    "at": "2026-07-09T16:00:03",
     "counts": {
-      "applied": 2,
+      "applied": 0,
       "dup": 0,
       "malformed": 0,
-      "refuse": 2,
-      "skip": 0,
+      "refuse": 0,
+      "skip": 2,
       "unsupported": 0
     },
     "ok": true,
-    "open": 4,
+    "open": 2,
     "skipped": null,
     "stale": false,
     "truncated": false
