@@ -86,26 +86,28 @@ const ISSUES_NEW = "https://github.com/" + REPO + "/issues/new";
 function esc(s) {
   return String(s == null ? "" : s)
     .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;");
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
 }
 
 function issueUrl(type, id, verdict, note) {
   const generated = new Date().toISOString().replace(/\.\d{3}Z$/, "");
-  const trimmed = (note && note.trim() ? note.trim() : "").slice(0, 300);
+  const trimmed = (note && note.trim() ? note.trim() : "").slice(0, 500);
   const noteLine = trimmed ? JSON.stringify(trimmed) : '""';
   // INDEX_HTML is a Python raw string: use \n (one backslash) so JS gets a
   // real newline escape. "\\n" here would emit a literal backslash-n and the
   // poller front-matter parser would fail (MALFORMED).
+  // Quote scalars so IDs with special YAML chars cannot break parsing.
   const body =
     "---\n" +
-    "type: " + type + "\n" +
-    "id: " + id + "\n" +
-    "verdict: " + verdict + "\n" +
+    "type: " + JSON.stringify(type) + "\n" +
+    "id: " + JSON.stringify(id) + "\n" +
+    "verdict: " + JSON.stringify(verdict) + "\n" +
     "note: " + noteLine + "\n" +
     "source: harness-review-pages\n" +
     "generated: " + generated + "\n" +
     "---\n\n" +
-    "Queued from the harness-review status page. The cluster poller will apply or refuse this decision per governance.\n";
+    "Queued from the harness-review status page. The cluster poller will apply or refuse this decision per governance.\n" +
+    "Do not edit the --- front matter or remove the harness-decision label.\n";
   const title = "[harness-decision] " + verdict + " " + id;
   const u = new URL(ISSUES_NEW);
   u.searchParams.set("title", title);
@@ -150,32 +152,39 @@ function render(data) {
     (poller && poller.at ? " · last poller " + poller.at : " · poller heartbeat: none yet");
 
   const staleEl = document.getElementById("stale");
-  if (!poller || !poller.at || poller.stale || poller.ok === false) {
+  if (!poller || !poller.at || poller.stale || poller.ok === false || poller.truncated) {
     staleEl.style.display = "block";
-    staleEl.textContent = !poller || !poller.at
-      ? "Poller heartbeat missing — cluster may not be applying decisions."
-      : (poller.ok === false
-          ? "Last poller run failed (" + (poller.at || "?") + "). Check gh auth / PATH on FASRC."
-          : "Poller heartbeat is stale (" + poller.at + "). Expected hourly when the cluster is awake.");
+    if (poller && poller.truncated) {
+      staleEl.textContent = "Poller issue list may be truncated (≥50 open). Close or process backlog.";
+    } else {
+      staleEl.textContent = !poller || !poller.at
+        ? "Poller heartbeat missing — cluster may not be applying decisions."
+        : (poller.ok === false
+            ? "Last poller run failed (" + (poller.at || "?") + "). Check gh auth / PATH on FASRC."
+            : "Poller heartbeat is stale (" + poller.at + "). Expected hourly when the cluster is awake.");
+    }
   } else {
     staleEl.style.display = "none";
   }
 
   const sched = data.schedules || {};
   const stats = document.getElementById("stats");
+  let statsHtml =
+    '<div class="stat"><div class="label">Open decisions</div>' +
+    '<div class="value">' + pending.length + " candidate(s)</div></div>" +
+    '<div class="stat"><div class="label">Schedules</div>' +
+    '<div class="value">dream ' + esc(sched.dream || "Sun 05:00") +
+    " · digest " + esc(sched.digest || "Mon 08:00") +
+    " · poller " + esc(sched.poller || "hourly") + "</div></div>";
   if (digest) {
-    stats.innerHTML =
+    statsHtml =
       '<div class="stat"><div class="label">Evaluator suite</div>' +
       '<div class="value ' + (digest.suite_ok ? "ok" : "bad") + '">' + esc(digest.suite) + "</div></div>" +
       '<div class="stat"><div class="label">Signals (8-day)</div>' +
       '<div class="value">' + esc(digest.signals || "none") + "</div></div>" +
-      '<div class="stat"><div class="label">Schedules</div>' +
-      '<div class="value">dream ' + esc(sched.dream || "Sun 05:00") +
-      " · digest " + esc(sched.digest || "Mon 08:00") +
-      " · poller " + esc(sched.poller || "hourly") + "</div></div>" +
-      '<div class="stat"><div class="label">Open decisions</div>' +
-      '<div class="value">' + pending.length + " candidate(s)</div></div>";
+      statsHtml;
   }
+  stats.innerHTML = statsHtml;
 
   const pend = document.getElementById("pending");
   if (pending.length === 0) {
@@ -183,7 +192,12 @@ function render(data) {
   } else {
     pend.innerHTML = "<h2>Candidates awaiting your decision (" + pending.length + ")</h2>" +
       pending.map((c) => {
-        const hint = '<p class="muted">Promote queues an audit Issue only — the poller always refuses auto-promote; follow the candidate recipe on FASRC, then close the Issue.</p>';
+        let hint = '<p class="muted">Promote queues an audit Issue only — the poller always refuses auto-promote; follow the candidate recipe on FASRC, then close the Issue.</p>';
+        if (c.locked_hint) {
+          hint += '<p class="muted">Likely locked-surface — interactive apply required.</p>';
+        } else if (c.has_patch === false) {
+          hint += '<p class="muted">No patch.diff — multi-step recipe expected.</p>';
+        }
         return '<div class="card"><h3>' + esc(c.slug) + "</h3>" +
           "<p>" + esc(c.target) + "</p>" +
           (c.validation ? '<p class="muted">Validation: ' + esc(c.validation) + "</p>" : "") +
@@ -199,13 +213,13 @@ function render(data) {
   const dreamEl = document.getElementById("dream");
   if (dream && dream.items && dream.items.length) {
     dreamEl.innerHTML = "<h2>Dream-sweep deferred items — " + esc(dream.store) + "</h2>" +
-      '<p class="muted">Resolve = implement as stated (often interactive). Dismiss = leave as-is and annotate.</p>' +
+      '<p class="muted">Resolve queues interactive work (poller refuses auto-resolve). Dismiss = leave as-is and annotate.</p>' +
       dream.items.map((it) => {
         const id = it.id || ("dream-" + dream.store + "-item" + it.n);
         return '<div class="card"><p>' + esc(it.text) + "</p>" +
           actionRow("dream", id, [
-            ["resolve", "Resolve as stated", "primary"],
-            ["dismiss", "Dismiss", "warn"],
+            ["resolve", "Queue resolve (interactive)", "warn"],
+            ["dismiss", "Dismiss", ""],
           ]) + "</div>";
       }).join("");
   } else {
