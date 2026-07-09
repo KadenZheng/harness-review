@@ -59,35 +59,25 @@
         "id": "dream--n-home03-kzheng-looping-machines-item3",
         "n": 3,
         "text": "Description-vs-body staleness in `lm_scale_carving_corrected.md`: description still says \"distinct-per-iter is REFUTED\" and \"the open A1 test\", but the body itself corrects both (\"REFUTED is an overclaim \u2014 report nesting as positive evidence\"; \"Sub-question B ANSWERED 2026-06-08\"). Body also still says `carving_distinctness.py` is \"to be written\" while later text treats it as existing. Left as found."
-      },
-      {
-        "id": "dream--n-home03-kzheng-looping-machines-item4",
-        "n": 4,
-        "text": "Naming inconsistency: \"iter-0 redundancy basin\" (`v7_research_orientation.md`, `sparseloop_general_goal.md`) vs \"iter-1 redundancy\" (`v7_stage_b_axes.md` description, MEMORY.md line). Left as found."
-      },
-      {
-        "id": "dream--n-home03-kzheng-looping-machines-item6",
-        "n": 6,
-        "text": "Successor repo `looping/looping_machines` is rb-managed (has `CHANGELOG.md` + `RESEARCH_STATE.md`): this store predates that; whether its result-bearing files (lm_scale_*, v7_*) should defer to the ledger is a governance question, not this pass's."
       }
     ],
     "store": "-n-home03-kzheng-looping-machines"
   },
-  "generated": "2026-07-09 14:29",
-  "generated_iso": "2026-07-09T14:29:49",
+  "generated": "2026-07-09 15:00",
+  "generated_iso": "2026-07-09T15:00:12",
   "pages_url": "https://kadenzheng.github.io/harness-review",
   "poller": {
-    "at": "2026-07-09T14:18:00",
+    "at": "2026-07-09T15:00:12",
     "counts": {
-      "applied": 0,
+      "applied": 2,
       "dup": 0,
       "malformed": 0,
-      "refuse": 0,
+      "refuse": 2,
       "skip": 0,
       "unsupported": 0
     },
     "ok": true,
-    "open": 0,
+    "open": 4,
     "skipped": null,
     "stale": false,
     "truncated": false
