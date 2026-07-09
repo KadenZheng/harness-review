@@ -121,22 +121,22 @@
     "report": "~/harness/runs/dream-sweep-20260708-1848.md",
     "store": "-n-home03-kzheng-looping-machines"
   },
-  "generated": "2026-07-09 13:03",
-  "generated_iso": "2026-07-09T13:03:42",
+  "generated": "2026-07-09 13:15",
+  "generated_iso": "2026-07-09T13:15:28",
   "pages_url": "https://kadenzheng.github.io/harness-review",
   "poller": {
-    "at": "2026-07-09T13:03:38",
+    "at": "2026-07-09T13:15:28",
     "counts": {
       "applied": 0,
       "dup": 0,
       "malformed": 0,
-      "refuse": 1,
+      "refuse": 0,
       "skip": 0,
       "unsupported": 0
     },
-    "host": "holylogin05.rc.fas.harvard.edu",
+    "host": "holy7c24604.rc.fas.harvard.edu",
     "ok": true,
-    "open": 1
+    "open": 0
   },
   "repo": "KadenZheng/harness-review",
   "schedules": {
