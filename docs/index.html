@@ -4,79 +4,219 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Harness Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --bg: #0f1419; --fg: #e7ecf1; --muted: #8b98a5; --card: #1a2332;
-    --border: #2a3544; --ok: #3dd68c; --warn: #f5a524; --bad: #f76e6e;
-    --accent: #5b9fd4; --btn: #243044; --btn-hover: #2f3f56;
+    --bg: #f4f1ea;
+    --bg-accent: #e8e2d6;
+    --ink: #1c1915;
+    --muted: #6b645a;
+    --line: #d4cdc0;
+    --panel: #fffcf7;
+    --ok: #1f7a4d;
+    --ok-bg: #e4f3ea;
+    --warn: #9a5b00;
+    --warn-bg: #f8edd8;
+    --bad: #a12828;
+    --bad-bg: #f8e6e4;
+    --info: #245a7a;
+    --info-bg: #e6f0f6;
+    --action: #2c3a2e;
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0; font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
-    background: radial-gradient(1200px 600px at 10% -10%, #1a2a3a 0%, var(--bg) 55%);
-    color: var(--fg); line-height: 1.45; min-height: 100vh;
+    margin: 0;
+    font-family: "DM Sans", "Segoe UI", sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(900px 420px at 0% -5%, #efe8d8 0%, transparent 55%),
+      linear-gradient(180deg, #f7f3eb 0%, var(--bg) 40%, #efe9de 100%);
+    line-height: 1.5;
+    min-height: 100vh;
   }
-  main { max-width: 920px; margin: 0 auto; padding: 28px 18px 64px; }
-  h1 { font-size: 1.75rem; margin: 0 0 6px; letter-spacing: -0.02em; }
-  h2 { font-size: 1.1rem; margin: 28px 0 12px; font-weight: 600; }
-  .meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 18px; }
-  .banner {
-    background: #1e2d22; border: 1px solid #2f4a38; color: #b7e0c2;
-    padding: 12px 14px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 20px;
+  main { max-width: 860px; margin: 0 auto; padding: 36px 20px 72px; }
+  .brand {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 8px;
   }
-  .stats { display: flex; flex-wrap: wrap; gap: 18px; margin: 16px 0 8px; }
-  .stat { min-width: 140px; }
-  .stat .label { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
-  .stat .value { font-size: 1.05rem; font-weight: 600; margin-top: 2px; }
-  .ok { color: var(--ok); } .bad { color: var(--bad); }
-  .card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 10px; padding: 14px 16px; margin-bottom: 12px;
+  h1 { font-size: 2rem; margin: 0 0 8px; letter-spacing: -0.03em; font-weight: 700; }
+  .lede { color: var(--muted); font-size: 1.02rem; margin: 0 0 24px; max-width: 42rem; }
+  .flow {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    margin: 0 0 28px;
   }
-  .card h3 { margin: 0 0 8px; font-size: 1rem; }
-  .card p { margin: 0 0 8px; color: #c5d0db; font-size: 0.92rem; }
-  .muted { color: var(--muted); font-size: 0.85rem; }
-  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center; }
-  a.btn, button.btn {
-    display: inline-block; text-decoration: none; color: var(--fg);
-    background: var(--btn); border: 1px solid var(--border); border-radius: 6px;
-    padding: 7px 12px; font-size: 0.85rem; cursor: pointer; font-family: inherit;
+  .flow-step {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px 14px;
   }
-  a.btn:hover, button.btn:hover { background: var(--btn-hover); }
-  a.btn.primary { background: #2a4a6a; border-color: #3a6a94; }
-  a.btn.warn { background: #4a3a20; border-color: #7a5a28; }
-  a.btn.danger { background: #4a2a2a; border-color: #7a3a3a; }
+  .flow-step .n {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.72rem;
+    color: var(--muted); margin-bottom: 4px;
+  }
+  .flow-step strong { display: block; font-size: 0.95rem; margin-bottom: 2px; }
+  .flow-step span { font-size: 0.84rem; color: var(--muted); }
+  .status-bar {
+    display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 28px;
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 999px; padding: 7px 12px; font-size: 0.86rem;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+  .dot.ok { background: var(--ok); }
+  .dot.bad { background: var(--bad); }
+  .dot.warn { background: var(--warn); }
+  .alert {
+    border-radius: 10px; padding: 12px 14px; margin: 0 0 20px; font-size: 0.92rem;
+    border: 1px solid var(--line);
+  }
+  .alert.warn { background: var(--warn-bg); border-color: #e2c98a; color: #5c3a00; }
+  .alert.bad { background: var(--bad-bg); border-color: #e3b0aa; color: #6d1c1c; }
+  .section { margin: 0 0 36px; }
+  .section-head { margin: 0 0 6px; }
+  .section-head h2 {
+    margin: 0; font-size: 1.2rem; letter-spacing: -0.02em; font-weight: 650;
+  }
+  .section-sub { margin: 0 0 14px; color: var(--muted); font-size: 0.92rem; }
+  .badge {
+    display: inline-block; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px; margin-left: 8px;
+    vertical-align: middle;
+  }
+  .badge.action { background: var(--warn-bg); color: var(--warn); }
+  .badge.ref { background: var(--info-bg); color: var(--info); }
+  .badge.clear { background: var(--ok-bg); color: var(--ok); }
+  .legend {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px 14px; margin: 0 0 14px;
+    font-size: 0.88rem;
+  }
+  .legend dt {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.78rem;
+    font-weight: 500; margin-top: 8px;
+  }
+  .legend dt:first-child { margin-top: 0; }
+  .legend dd { margin: 2px 0 0; color: var(--muted); }
+  .item {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 12px; padding: 16px 18px; margin: 0 0 12px;
+  }
+  .item-top {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline;
+    justify-content: space-between; margin: 0 0 8px;
+  }
+  .item h3 { margin: 0; font-size: 1.02rem; font-weight: 650; }
+  .tag {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.72rem;
+    color: var(--muted); background: var(--bg-accent);
+    border-radius: 6px; padding: 2px 7px;
+  }
+  .item .body { margin: 0 0 8px; color: #3a342c; font-size: 0.95rem; }
+  .item .extra { margin: 0 0 10px; color: var(--muted); font-size: 0.86rem; }
+  .callout {
+    font-size: 0.84rem; border-radius: 8px; padding: 8px 10px; margin: 0 0 12px;
+  }
+  .callout.info { background: var(--info-bg); color: #1d4560; }
+  .callout.warn { background: var(--warn-bg); color: #5c3a00; }
+  .actions {
+    display: flex; flex-direction: column; gap: 10px;
+    border-top: 1px solid var(--line); padding-top: 12px; margin-top: 4px;
+  }
+  .action-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  a.btn {
+    display: inline-block; text-decoration: none; border-radius: 8px;
+    padding: 8px 12px; font-size: 0.88rem; font-weight: 600;
+    font-family: inherit; border: 1px solid transparent; cursor: pointer;
+  }
+  a.btn:hover { filter: brightness(0.97); }
+  a.btn.reject { background: var(--bad-bg); color: var(--bad); border-color: #e3b0aa; }
+  a.btn.defer { background: var(--bg-accent); color: var(--ink); border-color: var(--line); }
+  a.btn.promote, a.btn.resolve {
+    background: var(--warn-bg); color: var(--warn); border-color: #e2c98a;
+  }
+  a.btn.dismiss { background: var(--ok-bg); color: var(--ok); border-color: #b7d9c4; }
   input.note {
-    flex: 1; min-width: 180px; background: #121820; border: 1px solid var(--border);
-    color: var(--fg); border-radius: 6px; padding: 7px 10px; font-size: 0.85rem;
+    width: 100%; background: #fff; border: 1px solid var(--line);
+    color: var(--ink); border-radius: 8px; padding: 8px 10px;
+    font-size: 0.88rem; font-family: inherit;
   }
+  input.note:focus { outline: 2px solid #c9b896; border-color: #b8a888; }
+  .empty {
+    background: var(--ok-bg); color: var(--ok); border: 1px solid #b7d9c4;
+    border-radius: 10px; padding: 14px 16px; font-size: 0.95rem;
+  }
+  details.ref {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 12px; padding: 4px 16px 12px; margin: 0 0 12px;
+  }
+  details.ref > summary {
+    cursor: pointer; font-weight: 650; padding: 12px 0; list-style: none;
+  }
+  details.ref > summary::-webkit-details-marker { display: none; }
+  details.ref > summary::before {
+    content: "▸ "; color: var(--muted); font-family: "IBM Plex Mono", monospace;
+  }
+  details.ref[open] > summary::before { content: "▾ "; }
+  .note-list { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.9rem; }
+  .note-list li { margin: 0 0 6px; }
   table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--border); }
-  th { color: var(--muted); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; }
-  .empty { color: var(--ok); padding: 12px 0; }
+  th, td { text-align: left; padding: 8px 4px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
   .err { color: var(--bad); }
-  footer { margin-top: 36px; color: var(--muted); font-size: 0.8rem; }
+  footer { margin-top: 40px; color: var(--muted); font-size: 0.8rem; }
+  footer code { font-family: "IBM Plex Mono", monospace; font-size: 0.76rem; }
+  @media (max-width: 720px) {
+    .flow { grid-template-columns: 1fr; }
+    h1 { font-size: 1.65rem; }
+  }
 </style>
 </head>
 <body>
 <main>
-  <h1>Harness Review</h1>
-  <div class="meta" id="meta">Loading status…</div>
-  <div class="banner">
-    Decisions queue as GitHub Issues (label <code>harness-decision</code>).
-    You must be logged into GitHub in this browser. The FASRC poller applies or
-    refuses them on the next hourly run when the cluster is awake — not instant remote execution.
-    Promotions and dream resolves are refused for interactive apply on the cluster.
+  <p class="brand">Harness Review</p>
+  <h1>Decide harness improvements off-cluster</h1>
+  <p class="lede" id="lede">
+    Review pending candidates and memory judgment items. Clicking a button opens a
+    GitHub Issue — the FASRC poller applies (or refuses) it on the next hourly run.
+  </p>
+
+  <div class="flow" aria-label="How decisions work">
+    <div class="flow-step">
+      <div class="n">Step 1</div>
+      <strong>Choose an action</strong>
+      <span>Reject / defer / dismiss apply automatically. Promote / resolve need you on the cluster.</span>
+    </div>
+    <div class="flow-step">
+      <div class="n">Step 2</div>
+      <strong>Submit a GitHub Issue</strong>
+      <span>Stay logged into GitHub. Do not edit the --- front matter or remove the label.</span>
+    </div>
+    <div class="flow-step">
+      <div class="n">Step 3</div>
+      <strong>Wait for the hourly poller</strong>
+      <span>Not instant. When FASRC is awake, the poller applies or comments with next steps.</span>
+    </div>
   </div>
-  <div id="stale" class="banner" style="display:none;background:#3a2a1a;border-color:#7a5a28;color:#f0d9a8;"></div>
-  <div id="stats" class="stats"></div>
-  <div id="pending"></div>
-  <div id="dream"></div>
-  <div id="notes"></div>
-  <div id="history"></div>
+
+  <div id="stale" class="alert warn" style="display:none;"></div>
+  <div class="status-bar" id="status"></div>
+
+  <section class="section" id="pending"></section>
+  <section class="section" id="dream"></section>
+  <section class="section" id="reference"></section>
+
   <footer>
-    Source: <code>~/harness/bin/review-publish</code> ·
-    Governance: <code>~/docs/agent-ecosystem/05-self-improvement-governance.md</code>
+    Published by <code>~/harness/bin/review-publish</code> ·
+    Governance: <code>~/docs/agent-ecosystem/05-self-improvement-governance.md</code> ·
+    Page generated <span id="generated">…</span>
   </footer>
 </main>
 <script>
@@ -96,7 +236,6 @@ function issueUrl(type, id, verdict, note) {
   // INDEX_HTML is a Python raw string: use \n (one backslash) so JS gets a
   // real newline escape. "\\n" here would emit a literal backslash-n and the
   // poller front-matter parser would fail (MALFORMED).
-  // Quote scalars so IDs with special YAML chars cannot break parsing.
   const body =
     "---\n" +
     "type: " + JSON.stringify(type) + "\n" +
@@ -116,15 +255,17 @@ function issueUrl(type, id, verdict, note) {
   return u.toString();
 }
 
-function actionRow(type, id, choices) {
+function actionBlock(type, id, choices) {
   const noteId = "note-" + id.replace(/[^a-zA-Z0-9_-]/g, "_");
   const buttons = choices.map(([verdict, label, cls]) => {
     return '<a class="btn ' + (cls || "") + '" data-type="' + esc(type) +
       '" data-id="' + esc(id) + '" data-verdict="' + esc(verdict) +
       '" data-note-id="' + noteId + '" href="#">' + esc(label) + "</a>";
   }).join("");
-  return '<div class="actions">' + buttons +
-    '<input class="note" id="' + noteId + '" placeholder="optional note / reason"/>' +
+  return '<div class="actions">' +
+    '<div class="action-label">Your decision</div>' +
+    '<div class="btn-row">' + buttons + "</div>" +
+    '<input class="note" id="' + noteId + '" placeholder="Optional note (saved into the GitHub Issue)"/>' +
     "</div>";
 }
 
@@ -145,104 +286,147 @@ function render(data) {
   const dream = data.dream;
   const digest = data.digest;
   const poller = data.poller;
+  const dreamN = (dream && dream.items) ? dream.items.length : 0;
+  const needsYou = pending.length + dreamN;
 
-  document.getElementById("meta").textContent =
-    "Generated " + (data.generated || "?") +
-    " · poller " + ((data.schedules && data.schedules.poller) || "hourly") +
-    (poller && poller.at ? " · last poller " + poller.at : " · poller heartbeat: none yet");
+  document.getElementById("generated").textContent = data.generated || "?";
+  document.getElementById("lede").textContent = needsYou
+    ? ("You have " + needsYou + " item(s) waiting. Clicking a button opens a GitHub Issue — the FASRC poller applies or refuses it on the next hourly run.")
+    : "Nothing needs a decision right now. Health and history are below for reference.";
 
   const staleEl = document.getElementById("stale");
   if (!poller || !poller.at || poller.stale || poller.ok === false || poller.truncated) {
     staleEl.style.display = "block";
     if (poller && poller.truncated) {
-      staleEl.textContent = "Poller issue list may be truncated (≥50 open). Close or process backlog.";
+      staleEl.textContent = "Poller issue list may be truncated (≥50 open). Close or process backlog on GitHub.";
+    } else if (!poller || !poller.at) {
+      staleEl.textContent = "Poller heartbeat missing — the cluster may not be applying decisions yet.";
+    } else if (poller.ok === false) {
+      staleEl.textContent = "Last poller run failed (" + poller.at + "). Check gh auth / PATH on FASRC.";
     } else {
-      staleEl.textContent = !poller || !poller.at
-        ? "Poller heartbeat missing — cluster may not be applying decisions."
-        : (poller.ok === false
-            ? "Last poller run failed (" + (poller.at || "?") + "). Check gh auth / PATH on FASRC."
-            : "Poller heartbeat is stale (" + poller.at + "). Expected hourly when the cluster is awake.");
+      staleEl.textContent = "Poller heartbeat is stale (" + poller.at + "). Expected hourly when the cluster is awake.";
     }
   } else {
     staleEl.style.display = "none";
   }
 
-  const sched = data.schedules || {};
-  const stats = document.getElementById("stats");
-  let statsHtml =
-    '<div class="stat"><div class="label">Open decisions</div>' +
-    '<div class="value">' + pending.length + " candidate(s)</div></div>" +
-    '<div class="stat"><div class="label">Schedules</div>' +
-    '<div class="value">dream ' + esc(sched.dream || "Sun 05:00") +
-    " · digest " + esc(sched.digest || "Mon 08:00") +
-    " · poller " + esc(sched.poller || "hourly") + "</div></div>";
-  if (digest) {
-    statsHtml =
-      '<div class="stat"><div class="label">Evaluator suite</div>' +
-      '<div class="value ' + (digest.suite_ok ? "ok" : "bad") + '">' + esc(digest.suite) + "</div></div>" +
-      '<div class="stat"><div class="label">Signals (8-day)</div>' +
-      '<div class="value">' + esc(digest.signals || "none") + "</div></div>" +
-      statsHtml;
-  }
-  stats.innerHTML = statsHtml;
+  const suiteOk = digest ? !!digest.suite_ok : null;
+  const pollerOk = poller && poller.at && !poller.stale && poller.ok !== false;
+  document.getElementById("status").innerHTML =
+    '<div class="chip"><span class="dot ' + (needsYou ? "warn" : "ok") + '"></span>' +
+      (needsYou ? (needsYou + " need your decision") : "Inbox clear") + "</div>" +
+    '<div class="chip"><span class="dot ' + (pollerOk ? "ok" : "bad") + '"></span>' +
+      (poller && poller.at ? ("Poller last ran " + esc(poller.at)) : "Poller unseen") + "</div>" +
+    (digest
+      ? ('<div class="chip"><span class="dot ' + (suiteOk ? "ok" : "bad") + '"></span>Suite: ' +
+         esc(digest.suite) + "</div>")
+      : "") +
+    (digest && digest.signals
+      ? ('<div class="chip"><span class="dot"></span>Signals: ' + esc(digest.signals) + "</div>")
+      : "");
 
+  // --- Needs decision: candidates ---
   const pend = document.getElementById("pending");
   if (pending.length === 0) {
-    pend.innerHTML = "<h2>Candidates</h2><div class='empty'>No candidates awaiting promotion.</div>";
+    pend.innerHTML =
+      '<div class="section-head"><h2>Harness candidates <span class="badge clear">Clear</span></h2></div>' +
+      '<p class="section-sub">Proposed harness changes awaiting promote / reject / defer.</p>' +
+      '<div class="empty">No candidates waiting. New ones appear after weekly mining + drafting.</div>';
   } else {
-    pend.innerHTML = "<h2>Candidates awaiting your decision (" + pending.length + ")</h2>" +
+    pend.innerHTML =
+      '<div class="section-head"><h2>Harness candidates <span class="badge action">' +
+      pending.length + " waiting</span></h2></div>" +
+      '<p class="section-sub">These are proposed harness changes. Reject and Defer are applied by the poller. Promote only queues work — you still apply the recipe on FASRC.</p>' +
+      '<dl class="legend">' +
+      "<dt>Reject</dt><dd>Record rejection on the candidate; poller updates status automatically.</dd>" +
+      "<dt>Defer</dt><dd>Park it for later; poller updates status automatically.</dd>" +
+      "<dt>Promote (interactive)</dt><dd>Queues a ticket only. Poller refuses auto-apply. SSH to FASRC, follow the candidate recipe, then close the Issue.</dd>" +
+      "</dl>" +
       pending.map((c) => {
-        let hint = '<p class="muted">Promote queues an audit Issue only — the poller always refuses auto-promote; follow the candidate recipe on FASRC, then close the Issue.</p>';
+        let call = "";
         if (c.locked_hint) {
-          hint += '<p class="muted">Likely locked-surface — interactive apply required.</p>';
+          call = '<div class="callout warn">Likely touches a locked surface (hooks / rb / evaluator). Promote will stay interactive.</div>';
         } else if (c.has_patch === false) {
-          hint += '<p class="muted">No patch.diff — multi-step recipe expected.</p>';
+          call = '<div class="callout info">No single patch.diff — expect a multi-step recipe on the cluster.</div>';
+        } else {
+          call = '<div class="callout info">Promote still requires interactive apply on FASRC (poller never auto-promotes).</div>';
         }
-        return '<div class="card"><h3>' + esc(c.slug) + "</h3>" +
-          "<p>" + esc(c.target) + "</p>" +
-          (c.validation ? '<p class="muted">Validation: ' + esc(c.validation) + "</p>" : "") +
-          hint +
-          actionRow("candidate", c.id, [
-            ["promote", "Queue promote (interactive)", "warn"],
-            ["reject", "Reject", "danger"],
-            ["defer", "Defer", ""],
-          ]) + "</div>";
+        return '<article class="item">' +
+          '<div class="item-top"><h3>' + esc(c.slug) + '</h3><span class="tag">' + esc(c.id) + "</span></div>" +
+          '<p class="body">' + esc(c.target) + "</p>" +
+          (c.validation ? '<p class="extra">Validation: ' + esc(c.validation) + "</p>" : "") +
+          call +
+          actionBlock("candidate", c.id, [
+            ["reject", "Reject", "reject"],
+            ["defer", "Defer", "defer"],
+            ["promote", "Promote (interactive)", "promote"],
+          ]) + "</article>";
       }).join("");
   }
 
+  // --- Needs decision: dream items ---
   const dreamEl = document.getElementById("dream");
   if (dream && dream.items && dream.items.length) {
-    dreamEl.innerHTML = "<h2>Dream-sweep deferred items — " + esc(dream.store) + "</h2>" +
-      '<p class="muted">Resolve queues interactive work (poller refuses auto-resolve). Dismiss = leave as-is and annotate.</p>' +
+    dreamEl.innerHTML =
+      '<div class="section-head"><h2>Memory judgment items <span class="badge action">' +
+      dream.items.length + " waiting</span></h2></div>" +
+      '<p class="section-sub">From the latest dream-sweep of <code>' + esc(dream.store) +
+      "</code>. The headless pass refused to guess — you decide.</p>" +
+      '<dl class="legend">' +
+      "<dt>Dismiss</dt><dd>Leave as-is. Poller annotates the sweep report automatically.</dd>" +
+      "<dt>Resolve (interactive)</dt><dd>Queues a ticket only. Poller refuses auto-resolve. Fix it in an interactive Claude session on FASRC, then close the Issue.</dd>" +
+      "</dl>" +
       dream.items.map((it) => {
         const id = it.id || ("dream-" + dream.store + "-item" + it.n);
-        return '<div class="card"><p>' + esc(it.text) + "</p>" +
-          actionRow("dream", id, [
-            ["resolve", "Queue resolve (interactive)", "warn"],
-            ["dismiss", "Dismiss", ""],
-          ]) + "</div>";
+        return '<article class="item">' +
+          '<div class="item-top"><h3>Item ' + esc(String(it.n)) + '</h3><span class="tag">' + esc(id) + "</span></div>" +
+          '<p class="body">' + esc(it.text) + "</p>" +
+          actionBlock("dream", id, [
+            ["dismiss", "Dismiss", "dismiss"],
+            ["resolve", "Resolve (interactive)", "resolve"],
+          ]) + "</article>";
       }).join("");
   } else {
-    dreamEl.innerHTML = "";
+    dreamEl.innerHTML =
+      '<div class="section-head"><h2>Memory judgment items <span class="badge clear">Clear</span></h2></div>' +
+      '<p class="section-sub">Deferred contradictions / deletions from scheduled memory-dream.</p>' +
+      '<div class="empty">No deferred memory items right now.</div>';
   }
 
-  const notes = document.getElementById("notes");
+  // --- Reference (read-only) ---
+  const ref = document.getElementById("reference");
+  let refHtml =
+    '<div class="section-head"><h2>Reference <span class="badge ref">Read-only</span></h2></div>' +
+    '<p class="section-sub">Background only — nothing here queues a decision.</p>';
+
   if (digest && digest.notes && digest.notes.length) {
-    notes.innerHTML = "<h2>Evaluator notes</h2>" +
-      digest.notes.map((n) => '<p class="muted">' + esc(n) + "</p>").join("");
-  } else {
-    notes.innerHTML = "";
+    refHtml +=
+      '<details class="ref"><summary>Evaluator notes from latest digest</summary>' +
+      '<ul class="note-list">' +
+      digest.notes.map((n) => "<li>" + esc(n) + "</li>").join("") +
+      "</ul></details>";
   }
 
-  const hist = document.getElementById("history");
   if (decided.length) {
-    hist.innerHTML = "<h2>Decision history</h2><table><thead><tr><th>Candidate</th><th>Status</th></tr></thead><tbody>" +
-      decided.map((c) => "<tr><td>" + esc(c.slug) + "</td><td>" + esc(c.status) + "</td></tr>").join("") +
-      "</tbody></table>";
-  } else {
-    hist.innerHTML = "";
+    refHtml +=
+      '<details class="ref"><summary>Decision history (' + decided.length +
+      " candidates)</summary>" +
+      "<table><thead><tr><th>Candidate</th><th>Status</th></tr></thead><tbody>" +
+      decided.map((c) => "<tr><td>" + esc(c.slug) + "</td><td>" + esc(c.status) +
+        "</td></tr>").join("") +
+      "</tbody></table></details>";
   }
 
+  const sched = data.schedules || {};
+  refHtml +=
+    '<details class="ref"><summary>Schedules &amp; links</summary>' +
+    '<p class="extra" style="margin:8px 0;">Dream-sweep: ' + esc(sched.dream || "Sun 05:00") +
+    " · Weekly digest: " + esc(sched.digest || "Mon 08:00") +
+    " · Decision poller: " + esc(sched.poller || "hourly") + "</p>" +
+    '<p class="extra"><a href="https://github.com/' + REPO + '/issues?q=label%3Aharness-decision" target="_blank" rel="noopener">Open harness-decision Issues</a></p>' +
+    "</details>";
+
+  ref.innerHTML = refHtml;
   wireActions(document);
 }
 
@@ -250,7 +434,7 @@ fetch("status.json?ts=" + Date.now())
   .then((r) => { if (!r.ok) throw new Error("status.json " + r.status); return r.json(); })
   .then(render)
   .catch((e) => {
-    document.getElementById("meta").innerHTML =
+    document.getElementById("lede").innerHTML =
       '<span class="err">Failed to load status.json: ' + esc(e.message) + "</span>";
   });
 </script>
