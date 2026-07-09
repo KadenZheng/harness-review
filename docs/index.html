@@ -6,217 +6,153 @@
 <title>Harness Review</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --bg: #f4f1ea;
-    --bg-accent: #e8e2d6;
-    --ink: #1c1915;
-    --muted: #6b645a;
-    --line: #d4cdc0;
-    --panel: #fffcf7;
-    --ok: #1f7a4d;
-    --ok-bg: #e4f3ea;
-    --warn: #9a5b00;
-    --warn-bg: #f8edd8;
-    --bad: #a12828;
-    --bad-bg: #f8e6e4;
-    --info: #245a7a;
-    --info-bg: #e6f0f6;
-    --action: #2c3a2e;
+    --bg: #f7f4ef;
+    --ink: #1a1814;
+    --muted: #5c564c;
+    --line: #ddd4c6;
+    --panel: #fffdf9;
+    --soft: #f0ebe2;
+    --ok: #1b6b45;
+    --ok-soft: #e7f4ec;
+    --warn: #8a4b00;
+    --warn-soft: #f6ecd9;
+    --bad: #9b2c2c;
+    --bad-soft: #f7e8e6;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: "DM Sans", "Segoe UI", sans-serif;
+    font-family: "Source Sans 3", "Segoe UI", sans-serif;
     color: var(--ink);
-    background:
-      radial-gradient(900px 420px at 0% -5%, #efe8d8 0%, transparent 55%),
-      linear-gradient(180deg, #f7f3eb 0%, var(--bg) 40%, #efe9de 100%);
-    line-height: 1.5;
+    background: linear-gradient(180deg, #fbf8f2 0%, var(--bg) 28%, #f3eee5 100%);
+    line-height: 1.45;
     min-height: 100vh;
   }
-  main { max-width: 860px; margin: 0 auto; padding: 36px 20px 72px; }
-  .brand {
-    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--muted); margin: 0 0 8px;
+  main { max-width: 720px; margin: 0 auto; padding: 40px 18px 80px; }
+  .kicker {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 10px;
   }
-  h1 { font-size: 2rem; margin: 0 0 8px; letter-spacing: -0.03em; font-weight: 700; }
-  .lede { color: var(--muted); font-size: 1.02rem; margin: 0 0 24px; max-width: 42rem; }
-  .flow {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-    margin: 0 0 28px;
+  h1 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 2.1rem; line-height: 1.15; margin: 0 0 10px;
+    letter-spacing: -0.02em; font-weight: 700;
   }
-  .flow-step {
-    background: var(--panel); border: 1px solid var(--line);
-    border-radius: 10px; padding: 12px 14px;
+  .one-liner {
+    font-size: 1.05rem; color: var(--muted); margin: 0 0 22px; max-width: 38rem;
   }
-  .flow-step .n {
-    font-family: "IBM Plex Mono", monospace; font-size: 0.72rem;
-    color: var(--muted); margin-bottom: 4px;
+  .one-liner strong { color: var(--ink); font-weight: 600; }
+  .health { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; }
+  .pill {
+    font-size: 0.84rem; background: var(--panel); border: 1px solid var(--line);
+    border-radius: 999px; padding: 6px 11px; color: var(--muted);
   }
-  .flow-step strong { display: block; font-size: 0.95rem; margin-bottom: 2px; }
-  .flow-step span { font-size: 0.84rem; color: var(--muted); }
-  .status-bar {
-    display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 28px;
-  }
-  .chip {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--panel); border: 1px solid var(--line);
-    border-radius: 999px; padding: 7px 12px; font-size: 0.86rem;
-  }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
-  .dot.ok { background: var(--ok); }
-  .dot.bad { background: var(--bad); }
-  .dot.warn { background: var(--warn); }
+  .pill b { color: var(--ink); font-weight: 600; }
+  .pill.ok { background: var(--ok-soft); border-color: #b9d9c5; color: var(--ok); }
+  .pill.bad { background: var(--bad-soft); border-color: #e2b4ae; color: var(--bad); }
+  .pill.warn { background: var(--warn-soft); border-color: #e2c790; color: var(--warn); }
   .alert {
-    border-radius: 10px; padding: 12px 14px; margin: 0 0 20px; font-size: 0.92rem;
-    border: 1px solid var(--line);
+    background: var(--warn-soft); border: 1px solid #e2c790; color: #5a3600;
+    border-radius: 10px; padding: 11px 13px; margin: 0 0 20px; font-size: 0.92rem;
   }
-  .alert.warn { background: var(--warn-bg); border-color: #e2c98a; color: #5c3a00; }
-  .alert.bad { background: var(--bad-bg); border-color: #e3b0aa; color: #6d1c1c; }
-  .section { margin: 0 0 36px; }
-  .section-head { margin: 0 0 6px; }
-  .section-head h2 {
-    margin: 0; font-size: 1.2rem; letter-spacing: -0.02em; font-weight: 650;
+  h2 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 1.35rem; margin: 0 0 6px; font-weight: 700;
   }
-  .section-sub { margin: 0 0 14px; color: var(--muted); font-size: 0.92rem; }
-  .badge {
-    display: inline-block; font-size: 0.72rem; font-weight: 600;
-    letter-spacing: 0.04em; text-transform: uppercase;
-    padding: 3px 8px; border-radius: 999px; margin-left: 8px;
-    vertical-align: middle;
-  }
-  .badge.action { background: var(--warn-bg); color: var(--warn); }
-  .badge.ref { background: var(--info-bg); color: var(--info); }
-  .badge.clear { background: var(--ok-bg); color: var(--ok); }
-  .legend {
+  .sec-help { color: var(--muted); font-size: 0.95rem; margin: 0 0 16px; }
+  .sec { margin: 0 0 34px; }
+  .card {
     background: var(--panel); border: 1px solid var(--line);
-    border-radius: 10px; padding: 12px 14px; margin: 0 0 14px;
-    font-size: 0.88rem;
+    border-radius: 14px; padding: 18px; margin: 0 0 14px;
   }
-  .legend dt {
-    font-family: "IBM Plex Mono", monospace; font-size: 0.78rem;
-    font-weight: 500; margin-top: 8px;
+  .what {
+    display: inline-block; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    background: var(--soft); color: var(--muted);
+    border-radius: 6px; padding: 3px 8px; margin: 0 0 10px;
   }
-  .legend dt:first-child { margin-top: 0; }
-  .legend dd { margin: 2px 0 0; color: var(--muted); }
-  .item {
-    background: var(--panel); border: 1px solid var(--line);
-    border-radius: 12px; padding: 16px 18px; margin: 0 0 12px;
+  .card h3 { font-size: 1.08rem; margin: 0 0 8px; font-weight: 700; line-height: 1.3; }
+  .card .text { margin: 0 0 14px; color: #2c2822; font-size: 0.98rem; }
+  .card .more { margin: -6px 0 14px; color: var(--muted); font-size: 0.88rem; }
+  .choices { display: grid; gap: 8px; }
+  .choice {
+    display: grid; grid-template-columns: 150px 1fr; gap: 10px; align-items: center;
+    background: var(--soft); border: 1px solid transparent; border-radius: 10px;
+    padding: 8px 10px;
   }
-  .item-top {
-    display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline;
-    justify-content: space-between; margin: 0 0 8px;
-  }
-  .item h3 { margin: 0; font-size: 1.02rem; font-weight: 650; }
-  .tag {
-    font-family: "IBM Plex Mono", monospace; font-size: 0.72rem;
-    color: var(--muted); background: var(--bg-accent);
-    border-radius: 6px; padding: 2px 7px;
-  }
-  .item .body { margin: 0 0 8px; color: #3a342c; font-size: 0.95rem; }
-  .item .extra { margin: 0 0 10px; color: var(--muted); font-size: 0.86rem; }
-  .callout {
-    font-size: 0.84rem; border-radius: 8px; padding: 8px 10px; margin: 0 0 12px;
-  }
-  .callout.info { background: var(--info-bg); color: #1d4560; }
-  .callout.warn { background: var(--warn-bg); color: #5c3a00; }
-  .actions {
-    display: flex; flex-direction: column; gap: 10px;
-    border-top: 1px solid var(--line); padding-top: 12px; margin-top: 4px;
-  }
-  .action-label {
-    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em;
-    text-transform: uppercase; color: var(--muted);
-  }
-  .btn-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .choice:hover { border-color: var(--line); background: #ebe5da; }
   a.btn {
-    display: inline-block; text-decoration: none; border-radius: 8px;
-    padding: 8px 12px; font-size: 0.88rem; font-weight: 600;
-    font-family: inherit; border: 1px solid transparent; cursor: pointer;
+    display: inline-block; text-align: center; text-decoration: none;
+    font-weight: 700; font-size: 0.88rem; border-radius: 8px;
+    padding: 9px 10px; border: 1px solid transparent; font-family: inherit;
   }
-  a.btn:hover { filter: brightness(0.97); }
-  a.btn.reject { background: var(--bad-bg); color: var(--bad); border-color: #e3b0aa; }
-  a.btn.defer { background: var(--bg-accent); color: var(--ink); border-color: var(--line); }
+  a.btn.reject { background: var(--bad-soft); color: var(--bad); border-color: #e2b4ae; }
+  a.btn.defer { background: #fff; color: var(--ink); border-color: var(--line); }
   a.btn.promote, a.btn.resolve {
-    background: var(--warn-bg); color: var(--warn); border-color: #e2c98a;
+    background: var(--warn-soft); color: var(--warn); border-color: #e2c790;
   }
-  a.btn.dismiss { background: var(--ok-bg); color: var(--ok); border-color: #b7d9c4; }
+  a.btn.dismiss { background: var(--ok-soft); color: var(--ok); border-color: #b9d9c5; }
+  .effect { font-size: 0.86rem; color: var(--muted); }
+  .effect b { color: var(--ink); font-weight: 600; }
+  .note-wrap { margin-top: 10px; }
+  .note-wrap label {
+    display: block; font-size: 0.78rem; font-weight: 600; color: var(--muted);
+    margin-bottom: 4px;
+  }
   input.note {
-    width: 100%; background: #fff; border: 1px solid var(--line);
-    color: var(--ink); border-radius: 8px; padding: 8px 10px;
-    font-size: 0.88rem; font-family: inherit;
+    width: 100%; border: 1px solid var(--line); border-radius: 8px;
+    padding: 9px 11px; font: inherit; background: #fff; color: var(--ink);
   }
-  input.note:focus { outline: 2px solid #c9b896; border-color: #b8a888; }
+  input.note:focus { outline: 2px solid #d2c3a4; border-color: #c2b08a; }
   .empty {
-    background: var(--ok-bg); color: var(--ok); border: 1px solid #b7d9c4;
-    border-radius: 10px; padding: 14px 16px; font-size: 0.95rem;
+    background: var(--ok-soft); color: var(--ok); border: 1px solid #b9d9c5;
+    border-radius: 12px; padding: 16px; font-size: 0.98rem;
   }
-  details.ref {
-    background: var(--panel); border: 1px solid var(--line);
-    border-radius: 12px; padding: 4px 16px 12px; margin: 0 0 12px;
+  details.morebox {
+    border-top: 1px solid var(--line); padding-top: 18px; margin-top: 8px;
   }
-  details.ref > summary {
-    cursor: pointer; font-weight: 650; padding: 12px 0; list-style: none;
+  details.morebox > summary {
+    cursor: pointer; font-weight: 700; color: var(--muted); list-style: none;
   }
-  details.ref > summary::-webkit-details-marker { display: none; }
-  details.ref > summary::before {
-    content: "▸ "; color: var(--muted); font-family: "IBM Plex Mono", monospace;
-  }
-  details.ref[open] > summary::before { content: "▾ "; }
-  .note-list { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.9rem; }
-  .note-list li { margin: 0 0 6px; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-  th, td { text-align: left; padding: 8px 4px; border-bottom: 1px solid var(--line); }
-  th { color: var(--muted); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  details.morebox > summary::-webkit-details-marker { display: none; }
+  details.morebox > summary::before { content: "+ "; font-family: "IBM Plex Mono", monospace; }
+  details.morebox[open] > summary::before { content: "− "; }
+  .more-body { margin-top: 12px; color: var(--muted); font-size: 0.92rem; }
+  .more-body ul { margin: 8px 0; padding-left: 1.15rem; }
+  .more-body li { margin: 0 0 6px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 8px; }
+  th, td { text-align: left; padding: 7px 4px; border-bottom: 1px solid var(--line); color: var(--ink); }
+  th { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
   .err { color: var(--bad); }
-  footer { margin-top: 40px; color: var(--muted); font-size: 0.8rem; }
-  footer code { font-family: "IBM Plex Mono", monospace; font-size: 0.76rem; }
-  @media (max-width: 720px) {
-    .flow { grid-template-columns: 1fr; }
-    h1 { font-size: 1.65rem; }
+  footer { margin-top: 36px; color: var(--muted); font-size: 0.8rem; }
+  footer code { font-family: "IBM Plex Mono", monospace; font-size: 0.75rem; }
+  @media (max-width: 640px) {
+    .choice { grid-template-columns: 1fr; gap: 4px; }
+    a.btn { width: 100%; }
+    h1 { font-size: 1.7rem; }
   }
 </style>
 </head>
 <body>
 <main>
-  <p class="brand">Harness Review</p>
-  <h1>Decide harness improvements off-cluster</h1>
-  <p class="lede" id="lede">
-    Review pending candidates and memory judgment items. Clicking a button opens a
-    GitHub Issue — the FASRC poller applies (or refuses) it on the next hourly run.
+  <p class="kicker">Harness Review</p>
+  <h1>What should happen next?</h1>
+  <p class="one-liner" id="lede">
+    Each button opens a GitHub Issue. The cluster reads it within about an hour and
+    <strong>either does the action or tells you what to do on FASRC</strong>.
   </p>
+  <div id="alert" class="alert" style="display:none;"></div>
+  <div class="health" id="health"></div>
 
-  <div class="flow" aria-label="How decisions work">
-    <div class="flow-step">
-      <div class="n">Step 1</div>
-      <strong>Choose an action</strong>
-      <span>Reject / defer / dismiss apply automatically. Promote / resolve need you on the cluster.</span>
-    </div>
-    <div class="flow-step">
-      <div class="n">Step 2</div>
-      <strong>Submit a GitHub Issue</strong>
-      <span>Stay logged into GitHub. Do not edit the --- front matter or remove the label.</span>
-    </div>
-    <div class="flow-step">
-      <div class="n">Step 3</div>
-      <strong>Wait for the hourly poller</strong>
-      <span>Not instant. When FASRC is awake, the poller applies or comments with next steps.</span>
-    </div>
-  </div>
-
-  <div id="stale" class="alert warn" style="display:none;"></div>
-  <div class="status-bar" id="status"></div>
-
-  <section class="section" id="pending"></section>
-  <section class="section" id="dream"></section>
-  <section class="section" id="reference"></section>
+  <section class="sec" id="todo"></section>
+  <section class="sec" id="extra"></section>
 
   <footer>
-    Published by <code>~/harness/bin/review-publish</code> ·
-    Governance: <code>~/docs/agent-ecosystem/05-self-improvement-governance.md</code> ·
-    Page generated <span id="generated">…</span>
+    Updated <span id="generated">…</span> ·
+    <code>~/harness/bin/review-publish</code>
   </footer>
 </main>
 <script>
@@ -233,9 +169,7 @@ function issueUrl(type, id, verdict, note) {
   const generated = new Date().toISOString().replace(/\.\d{3}Z$/, "");
   const trimmed = (note && note.trim() ? note.trim() : "").slice(0, 500);
   const noteLine = trimmed ? JSON.stringify(trimmed) : '""';
-  // INDEX_HTML is a Python raw string: use \n (one backslash) so JS gets a
-  // real newline escape. "\\n" here would emit a literal backslash-n and the
-  // poller front-matter parser would fail (MALFORMED).
+  // INDEX_HTML is a Python raw string: use \n so JS gets a real newline.
   const body =
     "---\n" +
     "type: " + JSON.stringify(type) + "\n" +
@@ -255,27 +189,27 @@ function issueUrl(type, id, verdict, note) {
   return u.toString();
 }
 
-function actionBlock(type, id, choices) {
+function choices(type, id, rows) {
   const noteId = "note-" + id.replace(/[^a-zA-Z0-9_-]/g, "_");
-  const buttons = choices.map(([verdict, label, cls]) => {
-    return '<a class="btn ' + (cls || "") + '" data-type="' + esc(type) +
+  const opts = rows.map(([verdict, label, cls, effect]) => {
+    return '<div class="choice">' +
+      '<a class="btn ' + cls + '" href="#" data-type="' + esc(type) +
       '" data-id="' + esc(id) + '" data-verdict="' + esc(verdict) +
-      '" data-note-id="' + noteId + '" href="#">' + esc(label) + "</a>";
+      '" data-note-id="' + noteId + '">' + esc(label) + "</a>" +
+      '<div class="effect">' + effect + "</div></div>";
   }).join("");
-  return '<div class="actions">' +
-    '<div class="action-label">Your decision</div>' +
-    '<div class="btn-row">' + buttons + "</div>" +
-    '<input class="note" id="' + noteId + '" placeholder="Optional note (saved into the GitHub Issue)"/>' +
-    "</div>";
+  return '<div class="choices">' + opts + "</div>" +
+    '<div class="note-wrap"><label for="' + noteId + '">Optional note</label>' +
+    '<input class="note" id="' + noteId + '" placeholder="Why you chose this (optional)"/></div>';
 }
 
-function wireActions(root) {
+function wire(root) {
   root.querySelectorAll("a.btn[data-verdict]").forEach((a) => {
     a.addEventListener("click", (e) => {
       e.preventDefault();
       const noteEl = document.getElementById(a.dataset.noteId);
-      const note = noteEl ? noteEl.value : "";
-      window.open(issueUrl(a.dataset.type, a.dataset.id, a.dataset.verdict, note), "_blank");
+      window.open(issueUrl(a.dataset.type, a.dataset.id, a.dataset.verdict,
+                           noteEl ? noteEl.value : ""), "_blank");
     });
   });
 }
@@ -284,150 +218,107 @@ function render(data) {
   const pending = (data.candidates || []).filter((c) => c.pending);
   const decided = (data.candidates || []).filter((c) => !c.pending);
   const dream = data.dream;
+  const dreamItems = (dream && dream.items) ? dream.items : [];
   const digest = data.digest;
   const poller = data.poller;
-  const dreamN = (dream && dream.items) ? dream.items.length : 0;
-  const needsYou = pending.length + dreamN;
+  const n = pending.length + dreamItems.length;
 
   document.getElementById("generated").textContent = data.generated || "?";
-  document.getElementById("lede").textContent = needsYou
-    ? ("You have " + needsYou + " item(s) waiting. Clicking a button opens a GitHub Issue — the FASRC poller applies or refuses it on the next hourly run.")
-    : "Nothing needs a decision right now. Health and history are below for reference.";
+  document.getElementById("lede").innerHTML = n
+    ? ("Below are <strong>" + n + " decision(s)</strong>. Each button opens a GitHub Issue. " +
+       "Within about an hour the cluster <strong>does the action or replies with next steps</strong>.")
+    : "Nothing needs a decision right now. Health is below; older history is tucked under “More”.";
 
-  const staleEl = document.getElementById("stale");
+  const alert = document.getElementById("alert");
   if (!poller || !poller.at || poller.stale || poller.ok === false || poller.truncated) {
-    staleEl.style.display = "block";
+    alert.style.display = "block";
     if (poller && poller.truncated) {
-      staleEl.textContent = "Poller issue list may be truncated (≥50 open). Close or process backlog on GitHub.";
+      alert.textContent = "Too many open Issues (≥50). Close some on GitHub so the poller can see new ones.";
     } else if (!poller || !poller.at) {
-      staleEl.textContent = "Poller heartbeat missing — the cluster may not be applying decisions yet.";
+      alert.textContent = "The cluster poller has not checked in yet — decisions may wait until it runs.";
     } else if (poller.ok === false) {
-      staleEl.textContent = "Last poller run failed (" + poller.at + "). Check gh auth / PATH on FASRC.";
+      alert.textContent = "Last poller run failed (" + poller.at + "). Decisions may be stuck until FASRC gh auth is fixed.";
     } else {
-      staleEl.textContent = "Poller heartbeat is stale (" + poller.at + "). Expected hourly when the cluster is awake.";
+      alert.textContent = "Poller looks stale (last seen " + poller.at + "). It should run hourly when the cluster is awake.";
     }
   } else {
-    staleEl.style.display = "none";
+    alert.style.display = "none";
   }
 
-  const suiteOk = digest ? !!digest.suite_ok : null;
   const pollerOk = poller && poller.at && !poller.stale && poller.ok !== false;
-  document.getElementById("status").innerHTML =
-    '<div class="chip"><span class="dot ' + (needsYou ? "warn" : "ok") + '"></span>' +
-      (needsYou ? (needsYou + " need your decision") : "Inbox clear") + "</div>" +
-    '<div class="chip"><span class="dot ' + (pollerOk ? "ok" : "bad") + '"></span>' +
-      (poller && poller.at ? ("Poller last ran " + esc(poller.at)) : "Poller unseen") + "</div>" +
-    (digest
-      ? ('<div class="chip"><span class="dot ' + (suiteOk ? "ok" : "bad") + '"></span>Suite: ' +
-         esc(digest.suite) + "</div>")
-      : "") +
-    (digest && digest.signals
-      ? ('<div class="chip"><span class="dot"></span>Signals: ' + esc(digest.signals) + "</div>")
-      : "");
+  let health = '<div class="pill ' + (n ? "warn" : "ok") + '"><b>' +
+    (n ? (n + " to decide") : "Inbox clear") + "</b></div>";
+  health += '<div class="pill ' + (pollerOk ? "ok" : "bad") + '">' +
+    (poller && poller.at ? ("Poller OK · " + esc(poller.at)) : "Poller unseen") + "</div>";
+  if (digest) {
+    health += '<div class="pill ' + (digest.suite_ok ? "ok" : "bad") + '">Suite ' +
+      esc(digest.suite) + "</div>";
+  }
+  document.getElementById("health").innerHTML = health;
 
-  // --- Needs decision: candidates ---
-  const pend = document.getElementById("pending");
-  if (pending.length === 0) {
-    pend.innerHTML =
-      '<div class="section-head"><h2>Harness candidates <span class="badge clear">Clear</span></h2></div>' +
-      '<p class="section-sub">Proposed harness changes awaiting promote / reject / defer.</p>' +
-      '<div class="empty">No candidates waiting. New ones appear after weekly mining + drafting.</div>';
+  const todo = document.getElementById("todo");
+  let html = "";
+
+  if (!n) {
+    html += '<div class="empty">All caught up — no candidates or memory items waiting.</div>';
   } else {
-    pend.innerHTML =
-      '<div class="section-head"><h2>Harness candidates <span class="badge action">' +
-      pending.length + " waiting</span></h2></div>" +
-      '<p class="section-sub">These are proposed harness changes. Reject and Defer are applied by the poller. Promote only queues work — you still apply the recipe on FASRC.</p>' +
-      '<dl class="legend">' +
-      "<dt>Reject</dt><dd>Record rejection on the candidate; poller updates status automatically.</dd>" +
-      "<dt>Defer</dt><dd>Park it for later; poller updates status automatically.</dd>" +
-      "<dt>Promote (interactive)</dt><dd>Queues a ticket only. Poller refuses auto-apply. SSH to FASRC, follow the candidate recipe, then close the Issue.</dd>" +
-      "</dl>" +
-      pending.map((c) => {
-        let call = "";
-        if (c.locked_hint) {
-          call = '<div class="callout warn">Likely touches a locked surface (hooks / rb / evaluator). Promote will stay interactive.</div>';
-        } else if (c.has_patch === false) {
-          call = '<div class="callout info">No single patch.diff — expect a multi-step recipe on the cluster.</div>';
-        } else {
-          call = '<div class="callout info">Promote still requires interactive apply on FASRC (poller never auto-promotes).</div>';
-        }
-        return '<article class="item">' +
-          '<div class="item-top"><h3>' + esc(c.slug) + '</h3><span class="tag">' + esc(c.id) + "</span></div>" +
-          '<p class="body">' + esc(c.target) + "</p>" +
-          (c.validation ? '<p class="extra">Validation: ' + esc(c.validation) + "</p>" : "") +
-          call +
-          actionBlock("candidate", c.id, [
-            ["reject", "Reject", "reject"],
-            ["defer", "Defer", "defer"],
-            ["promote", "Promote (interactive)", "promote"],
-          ]) + "</article>";
-      }).join("");
+    html += "<h2>Needs a decision</h2>" +
+      '<p class="sec-help">Pick one outcome per item. Beside each button: what happens after you click.</p>';
   }
 
-  // --- Needs decision: dream items ---
-  const dreamEl = document.getElementById("dream");
-  if (dream && dream.items && dream.items.length) {
-    dreamEl.innerHTML =
-      '<div class="section-head"><h2>Memory judgment items <span class="badge action">' +
-      dream.items.length + " waiting</span></h2></div>" +
-      '<p class="section-sub">From the latest dream-sweep of <code>' + esc(dream.store) +
-      "</code>. The headless pass refused to guess — you decide.</p>" +
-      '<dl class="legend">' +
-      "<dt>Dismiss</dt><dd>Leave as-is. Poller annotates the sweep report automatically.</dd>" +
-      "<dt>Resolve (interactive)</dt><dd>Queues a ticket only. Poller refuses auto-resolve. Fix it in an interactive Claude session on FASRC, then close the Issue.</dd>" +
-      "</dl>" +
-      dream.items.map((it) => {
-        const id = it.id || ("dream-" + dream.store + "-item" + it.n);
-        return '<article class="item">' +
-          '<div class="item-top"><h3>Item ' + esc(String(it.n)) + '</h3><span class="tag">' + esc(id) + "</span></div>" +
-          '<p class="body">' + esc(it.text) + "</p>" +
-          actionBlock("dream", id, [
-            ["dismiss", "Dismiss", "dismiss"],
-            ["resolve", "Resolve (interactive)", "resolve"],
-          ]) + "</article>";
-      }).join("");
-  } else {
-    dreamEl.innerHTML =
-      '<div class="section-head"><h2>Memory judgment items <span class="badge clear">Clear</span></h2></div>' +
-      '<p class="section-sub">Deferred contradictions / deletions from scheduled memory-dream.</p>' +
-      '<div class="empty">No deferred memory items right now.</div>';
-  }
+  pending.forEach((c) => {
+    html += '<article class="card">' +
+      '<div class="what">Harness change proposal</div>' +
+      "<h3>" + esc(c.slug) + "</h3>" +
+      '<p class="text">' + esc(c.target) + "</p>" +
+      (c.validation ? '<p class="more">Validation so far: ' + esc(c.validation) + "</p>" : "") +
+      choices("candidate", c.id, [
+        ["reject", "Reject", "reject",
+         "<b>Done by poller.</b> Marks this proposal rejected and keeps the rationale."],
+        ["defer", "Defer", "defer",
+         "<b>Done by poller.</b> Parks it for later without rejecting."],
+        ["promote", "Promote later", "promote",
+         "<b>Not automatic.</b> Opens a ticket. You still apply the recipe on FASRC, then close the Issue."],
+      ]) + "</article>";
+  });
 
-  // --- Reference (read-only) ---
-  const ref = document.getElementById("reference");
-  let refHtml =
-    '<div class="section-head"><h2>Reference <span class="badge ref">Read-only</span></h2></div>' +
-    '<p class="section-sub">Background only — nothing here queues a decision.</p>';
+  dreamItems.forEach((it) => {
+    const id = it.id || ("dream-" + dream.store + "-item" + it.n);
+    html += '<article class="card">' +
+      '<div class="what">Memory judgment · item ' + esc(String(it.n)) + "</div>" +
+      "<h3>Should the memory store change?</h3>" +
+      '<p class="text">' + esc(it.text) + "</p>" +
+      choices("dream", id, [
+        ["dismiss", "Leave as-is", "dismiss",
+         "<b>Done by poller.</b> Keeps current memory text and notes that you dismissed this."],
+        ["resolve", "Fix later", "resolve",
+         "<b>Not automatic.</b> Opens a ticket. You fix it in an interactive session on FASRC, then close the Issue."],
+      ]) + "</article>";
+  });
 
-  if (digest && digest.notes && digest.notes.length) {
-    refHtml +=
-      '<details class="ref"><summary>Evaluator notes from latest digest</summary>' +
-      '<ul class="note-list">' +
-      digest.notes.map((n) => "<li>" + esc(n) + "</li>").join("") +
-      "</ul></details>";
-  }
-
-  if (decided.length) {
-    refHtml +=
-      '<details class="ref"><summary>Decision history (' + decided.length +
-      " candidates)</summary>" +
-      "<table><thead><tr><th>Candidate</th><th>Status</th></tr></thead><tbody>" +
-      decided.map((c) => "<tr><td>" + esc(c.slug) + "</td><td>" + esc(c.status) +
-        "</td></tr>").join("") +
-      "</tbody></table></details>";
-  }
+  todo.innerHTML = html;
 
   const sched = data.schedules || {};
-  refHtml +=
-    '<details class="ref"><summary>Schedules &amp; links</summary>' +
-    '<p class="extra" style="margin:8px 0;">Dream-sweep: ' + esc(sched.dream || "Sun 05:00") +
-    " · Weekly digest: " + esc(sched.digest || "Mon 08:00") +
-    " · Decision poller: " + esc(sched.poller || "hourly") + "</p>" +
-    '<p class="extra"><a href="https://github.com/' + REPO + '/issues?q=label%3Aharness-decision" target="_blank" rel="noopener">Open harness-decision Issues</a></p>' +
-    "</details>";
+  let extra =
+    '<details class="morebox"><summary>More (history, notes, schedules)</summary><div class="more-body">';
+  if (digest && digest.notes && digest.notes.length) {
+    extra += "<p><b>Latest evaluator notes</b></p><ul>" +
+      digest.notes.map((n) => "<li>" + esc(n) + "</li>").join("") + "</ul>";
+  }
+  if (decided.length) {
+    extra += "<p><b>Earlier candidates</b></p><table><thead><tr><th>Candidate</th><th>Status</th></tr></thead><tbody>" +
+      decided.map((c) => "<tr><td>" + esc(c.slug) + "</td><td>" + esc(c.status) +
+        "</td></tr>").join("") + "</tbody></table>";
+  }
+  extra += "<p><b>When things run</b><br/>Dream-sweep " + esc(sched.dream || "Sun 05:00") +
+    " · Digest " + esc(sched.digest || "Mon 08:00") +
+    " · Poller " + esc(sched.poller || "hourly") + "</p>";
+  extra += '<p><a href="https://github.com/' + REPO +
+    '/issues?q=label%3Aharness-decision" target="_blank" rel="noopener">See queued GitHub Issues</a></p>';
+  extra += "</div></details>";
+  document.getElementById("extra").innerHTML = extra;
 
-  ref.innerHTML = refHtml;
-  wireActions(document);
+  wire(document);
 }
 
 fetch("status.json?ts=" + Date.now())
