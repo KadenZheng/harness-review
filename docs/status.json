@@ -3,6 +3,8 @@
     {
       "id": "c0001",
       "pending": false,
+      "promotion_blocker_count": 0,
+      "promotion_ready": true,
       "slug": "c0001",
       "status": "PROMOTED",
       "subject_path": "runs/run-20260708-cycle1/candidates/c0001/candidate.md",
@@ -11,6 +13,8 @@
     {
       "id": "c0002",
       "pending": false,
+      "promotion_blocker_count": 0,
+      "promotion_ready": true,
       "slug": "c0002",
       "status": "PROMOTED",
       "subject_path": "runs/run-20260708-cycle2/candidates/c0002/candidate.md",
@@ -19,6 +23,8 @@
     {
       "id": "c0003",
       "pending": false,
+      "promotion_blocker_count": 0,
+      "promotion_ready": true,
       "slug": "c0003",
       "status": "PROMOTED",
       "subject_path": "runs/run-20260708-cycle3/candidates/c0003/candidate.md",
@@ -27,6 +33,8 @@
     {
       "id": "c0004",
       "pending": false,
+      "promotion_blocker_count": 0,
+      "promotion_ready": true,
       "slug": "c0004",
       "status": "PROMOTED",
       "subject_path": "runs/run-20260709-cycle4/candidates/c0004/candidate.md",
@@ -35,6 +43,8 @@
     {
       "id": "c0005",
       "pending": false,
+      "promotion_blocker_count": 0,
+      "promotion_ready": true,
       "slug": "c0005",
       "status": "PROMOTED",
       "subject_path": "runs/run-20260709-cycle4/candidates/c0005/candidate.md",
@@ -43,6 +53,8 @@
     {
       "id": "c0006",
       "pending": false,
+      "promotion_blocker_count": 0,
+      "promotion_ready": true,
       "slug": "c0006",
       "status": "PROMOTED",
       "subject_path": "runs/run-20260709-cycle4/candidates/c0006/candidate.md",
@@ -58,27 +70,27 @@
   "dream": {
     "items": [
       {
-        "id": "dream--n-home03-kzheng-looping-machines-item1",
+        "id": "dream-74c618d482160fc0b9d18cd6",
         "n": 1,
         "subject_path": "runs/dream-sweep-20260708-1848.md",
         "subject_sha256": "762a8a6f97d6bd9ff02a411f5dc138f91504369abf93b10aadef47e939868e5d",
         "text": "Review the bound deferred item on FASRC."
       },
       {
-        "id": "dream--n-home03-kzheng-looping-machines-item3",
+        "id": "dream-cfeb0cc899c8df88209b9a16",
         "n": 3,
         "subject_path": "runs/dream-sweep-20260708-1848.md",
         "subject_sha256": "5d4f7048c43671813f752df6e47972354c6ab95a460fbed1c4ab1653e3c96cd3",
         "text": "Review the bound deferred item on FASRC."
       }
     ],
-    "store": "-n-home03-kzheng-looping-machines"
+    "store": "opaque"
   },
-  "generated": "2026-07-09 21:00",
-  "generated_iso": "2026-07-09T21:00:05",
+  "generated": "2026-07-10 01:00",
+  "generated_iso": "2026-07-10T01:00:06",
   "pages_url": "https://kadenzheng.github.io/harness-review",
   "poller": {
-    "at": "2026-07-09T21:00:05",
+    "at": "2026-07-10T00:00:04",
     "counts": {
       "applied": 0,
       "dup": 0,
@@ -87,7 +99,7 @@
       "skip": 2,
       "unsupported": 0
     },
-    "ok": true,
+    "ok": false,
     "open": 2,
     "skipped": null,
     "stale": false,

@@ -165,10 +165,8 @@ function esc(s) {
     .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
 }
 
-function issueUrl(type, id, verdict, note, subjectPath, subjectSha256) {
+function issueUrl(type, id, verdict, subjectPath, subjectSha256) {
   const generated = new Date().toISOString().replace(/\.\d{3}Z$/, "");
-  const trimmed = (note && note.trim() ? note.trim() : "").slice(0, 500);
-  const noteLine = trimmed ? JSON.stringify(trimmed) : '""';
   // INDEX_HTML is a Python raw string: use \n so JS gets a real newline.
   const body =
     "---\n" +
@@ -177,7 +175,7 @@ function issueUrl(type, id, verdict, note, subjectPath, subjectSha256) {
     "verdict: " + JSON.stringify(verdict) + "\n" +
     "subject_path: " + JSON.stringify(subjectPath) + "\n" +
     "subject_sha256: " + JSON.stringify(subjectSha256) + "\n" +
-    "note: " + noteLine + "\n" +
+    "note: \"\"\n" +
     "source: harness-review-pages\n" +
     "generated: " + generated + "\n" +
     "---\n\n" +
@@ -192,29 +190,24 @@ function issueUrl(type, id, verdict, note, subjectPath, subjectSha256) {
 }
 
 function choices(type, id, subjectPath, subjectSha256, rows) {
-  const noteId = "note-" + id.replace(/[^a-zA-Z0-9_-]/g, "_");
   const opts = rows.map(([verdict, label, cls, effect]) => {
     return '<div class="choice">' +
       '<a class="btn ' + cls + '" href="#" data-type="' + esc(type) +
       '" data-id="' + esc(id) + '" data-verdict="' + esc(verdict) +
       '" data-subject-path="' + esc(subjectPath) +
       '" data-subject-sha256="' + esc(subjectSha256) +
-      '" data-note-id="' + noteId + '">' + esc(label) + "</a>" +
+      '">' + esc(label) + "</a>" +
       '<div class="effect">' + effect + "</div></div>";
   }).join("");
-  return '<div class="choices">' + opts + "</div>" +
-    '<div class="note-wrap"><label for="' + noteId + '">Optional note</label>' +
-    '<input class="note" id="' + noteId + '" placeholder="Why you chose this (optional)"/></div>';
+  return '<div class="choices">' + opts + "</div>";
 }
 
 function wire(root) {
   root.querySelectorAll("a.btn[data-verdict]").forEach((a) => {
     a.addEventListener("click", (e) => {
       e.preventDefault();
-      const noteEl = document.getElementById(a.dataset.noteId);
       window.open(issueUrl(a.dataset.type, a.dataset.id, a.dataset.verdict,
-                           noteEl ? noteEl.value : "", a.dataset.subjectPath,
-                           a.dataset.subjectSha256), "_blank");
+                           a.dataset.subjectPath, a.dataset.subjectSha256), "_blank");
     });
   });
 }
@@ -277,6 +270,9 @@ function render(data) {
       "<h3>" + esc(c.slug) + "</h3>" +
       '<p class="text">' + esc(c.target) + "</p>" +
       (c.validation ? '<p class="more">Validation so far: ' + esc(c.validation) + "</p>" : "") +
+      '<p class="more">Promotion gate: ' +
+      (c.promotion_ready ? "ready for interactive human promotion" :
+       (esc(String(c.promotion_blocker_count)) + " blocker(s)")) + "</p>" +
       choices("candidate", c.id, c.subject_path, c.subject_sha256, [
         ["reject", "Reject", "reject",
          "<b>Done by poller.</b> Marks this proposal rejected and keeps the rationale."],
