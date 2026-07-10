@@ -3,49 +3,56 @@
     {
       "id": "c0001",
       "pending": false,
-      "slug": "c0001-phantom-launch-parser",
-      "status": "PROMOTED 2026-07-08 (see decision.md)"
+      "slug": "c0001",
+      "status": "PROMOTED",
+      "subject_path": "runs/run-20260708-cycle1/candidates/c0001/candidate.md",
+      "subject_sha256": "7e1c03e8921f6b549aaeb1447f3466f4e74e18fde8d20d803e110ad12ef8c81a"
     },
     {
       "id": "c0002",
       "pending": false,
-      "slug": "c0002-ledger-guard-launcher-grace",
-      "status": "PROMOTED 2026-07-08 (promotion = the user's explicit request to resolve the issue)"
+      "slug": "c0002",
+      "status": "PROMOTED",
+      "subject_path": "runs/run-20260708-cycle2/candidates/c0002/candidate.md",
+      "subject_sha256": "a734354dfe42484df6e686b71035679e33915159e38ecfbc8dcc12ca8a864cec"
     },
     {
       "id": "c0003",
       "pending": false,
-      "slug": "c0003-scheduled-dream-sweep",
-      "status": "PROMOTED 2026-07-08 (user-directed)"
+      "slug": "c0003",
+      "status": "PROMOTED",
+      "subject_path": "runs/run-20260708-cycle3/candidates/c0003/candidate.md",
+      "subject_sha256": "66c4649ec75b13de194e1cb6cb45d71f8465732c5d74bb52ce077e4a45ae1752"
     },
     {
       "id": "c0004",
       "pending": false,
-      "slug": "c0004-rb-launch-enrichment-and-verify-number",
-      "status": "PROMOTED 2026-07-09 (see decision.md)"
+      "slug": "c0004",
+      "status": "PROMOTED",
+      "subject_path": "runs/run-20260709-cycle4/candidates/c0004/candidate.md",
+      "subject_sha256": "4a2802a991204ec30fc808184edd25bbc579cada4f073f6d206209455144e6a0"
     },
     {
       "id": "c0005",
       "pending": false,
-      "slug": "c0005-per-repo-command-guard",
-      "status": "PROMOTED 2026-07-09 (see decision.md)"
+      "slug": "c0005",
+      "status": "PROMOTED",
+      "subject_path": "runs/run-20260709-cycle4/candidates/c0005/candidate.md",
+      "subject_sha256": "fcce1f95acf709b6e81c510374f867e759130c8ab1e06df92fc7011c7c4bdb4a"
     },
     {
       "id": "c0006",
       "pending": false,
-      "slug": "c0006-post-compaction-skill-reinject",
-      "status": "PROMOTED 2026-07-09 (see decision.md)"
+      "slug": "c0006",
+      "status": "PROMOTED",
+      "subject_path": "runs/run-20260709-cycle4/candidates/c0006/candidate.md",
+      "subject_sha256": "91b961b5c286e670a4254a9b841794cf697705150af8b54dcab7d3fb87e2956c"
     }
   ],
   "digest": {
-    "notes": [
-      "neuromodulated_recurrence: RESEARCH_STATE lags ledger by 25d (state 2026-06-13T14:23-0400, ledger 2026-07-08T17:30-0400)",
-      "-n-home03-kzheng-looping-greedy-loops: 26 topic files, last dream: never",
-      "-n-home03-kzheng-looping-looping-machines: 13 topic files, last dream: never",
-      "-n-home03-kzheng-looping-machines: 16 topic files, last dream: never"
-    ],
-    "signals": "14 rb rows, 6 codex-ledger files, 9 review verdicts, 0 correction memories",
-    "suite": "7 pass, 0 fail, 0 skip",
+    "notes": [],
+    "signals": "",
+    "suite": "PASS",
     "suite_ok": true
   },
   "dream": {
@@ -53,21 +60,25 @@
       {
         "id": "dream--n-home03-kzheng-looping-machines-item1",
         "n": 1,
-        "text": "Account contradiction: `fasrc_reference.md` still lists `kempner_undergrads`; MEMORY.md says it was replaced by `kempner_nsaphra_lab` and gone as of 2026-06-11. Update the reference file?"
+        "subject_path": "runs/dream-sweep-20260708-1848.md",
+        "subject_sha256": "762a8a6f97d6bd9ff02a411f5dc138f91504369abf93b10aadef47e939868e5d",
+        "text": "Review the bound deferred item on FASRC."
       },
       {
         "id": "dream--n-home03-kzheng-looping-machines-item3",
         "n": 3,
-        "text": "Description-vs-body staleness in `lm_scale_carving_corrected.md`: description still says \"distinct-per-iter is REFUTED\" and \"the open A1 test\", but the body itself corrects both (\"REFUTED is an overclaim \u2014 report nesting as positive evidence\"; \"Sub-question B ANSWERED 2026-06-08\"). Body also still says `carving_distinctness.py` is \"to be written\" while later text treats it as existing. Left as found."
+        "subject_path": "runs/dream-sweep-20260708-1848.md",
+        "subject_sha256": "5d4f7048c43671813f752df6e47972354c6ab95a460fbed1c4ab1653e3c96cd3",
+        "text": "Review the bound deferred item on FASRC."
       }
     ],
     "store": "-n-home03-kzheng-looping-machines"
   },
-  "generated": "2026-07-09 20:00",
-  "generated_iso": "2026-07-09T20:00:10",
+  "generated": "2026-07-09 21:00",
+  "generated_iso": "2026-07-09T21:00:05",
   "pages_url": "https://kadenzheng.github.io/harness-review",
   "poller": {
-    "at": "2026-07-09T20:00:10",
+    "at": "2026-07-09T21:00:05",
     "counts": {
       "applied": 0,
       "dup": 0,
