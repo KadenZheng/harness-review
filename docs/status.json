@@ -86,11 +86,11 @@
     ],
     "store": "opaque"
   },
-  "generated": "2026-07-10 13:00",
-  "generated_iso": "2026-07-10T13:00:03",
+  "generated": "2026-07-10 18:00",
+  "generated_iso": "2026-07-10T18:00:31",
   "pages_url": "https://kadenzheng.github.io/harness-review",
   "poller": {
-    "at": "2026-07-10T12:00:13",
+    "at": "2026-07-10T22:00:31Z",
     "counts": {
       "applied": 0,
       "dup": 0,
@@ -102,7 +102,6 @@
     "ok": true,
     "open": 2,
     "skipped": null,
-    "stale": false,
     "truncated": false
   },
   "repo": "KadenZheng/harness-review",

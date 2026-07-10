@@ -165,6 +165,13 @@ function esc(s) {
     .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
 }
 
+function heartbeatIsStale(at) {
+  const checkedAt = Date.parse(at);
+  if (!Number.isFinite(checkedAt)) return true;
+  const age = Date.now() - checkedAt;
+  return age < -5 * 60 * 1000 || age > 2.5 * 60 * 60 * 1000;
+}
+
 function issueUrl(type, id, verdict, subjectPath, subjectSha256) {
   const generated = new Date().toISOString().replace(/\.\d{3}Z$/, "");
   // INDEX_HTML is a Python raw string: use \n so JS gets a real newline.
@@ -219,6 +226,7 @@ function render(data) {
   const dreamItems = (dream && dream.items) ? dream.items : [];
   const digest = data.digest;
   const poller = data.poller;
+  const pollerStale = !poller || heartbeatIsStale(poller.at);
   const n = pending.length + dreamItems.length;
 
   document.getElementById("generated").textContent = data.generated || "?";
@@ -228,7 +236,7 @@ function render(data) {
     : "Nothing needs a decision right now. Health is below; older history is tucked under “More”.";
 
   const alert = document.getElementById("alert");
-  if (!poller || !poller.at || poller.stale || poller.ok === false || poller.truncated) {
+  if (!poller || !poller.at || pollerStale || poller.ok === false || poller.truncated) {
     alert.style.display = "block";
     if (poller && poller.truncated) {
       alert.textContent = "Too many open Issues (≥50). Close some on GitHub so the poller can see new ones.";
@@ -243,7 +251,7 @@ function render(data) {
     alert.style.display = "none";
   }
 
-  const pollerOk = poller && poller.at && !poller.stale && poller.ok !== false;
+  const pollerOk = poller && poller.at && !pollerStale && poller.ok !== false;
   let health = '<div class="pill ' + (n ? "warn" : "ok") + '"><b>' +
     (n ? (n + " to decide") : "Inbox clear") + "</b></div>";
   health += '<div class="pill ' + (pollerOk ? "ok" : "bad") + '">' +
