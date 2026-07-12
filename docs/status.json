@@ -68,29 +68,14 @@
     "suite_ok": true
   },
   "dream": {
-    "items": [
-      {
-        "id": "dream-74c618d482160fc0b9d18cd6",
-        "n": 1,
-        "subject_path": "runs/dream-sweep-20260708-1848.md",
-        "subject_sha256": "762a8a6f97d6bd9ff02a411f5dc138f91504369abf93b10aadef47e939868e5d",
-        "text": "Review the bound deferred item on FASRC."
-      },
-      {
-        "id": "dream-cfeb0cc899c8df88209b9a16",
-        "n": 3,
-        "subject_path": "runs/dream-sweep-20260708-1848.md",
-        "subject_sha256": "5d4f7048c43671813f752df6e47972354c6ab95a460fbed1c4ab1653e3c96cd3",
-        "text": "Review the bound deferred item on FASRC."
-      }
-    ],
+    "items": [],
     "store": "opaque"
   },
-  "generated": "2026-07-12 04:00",
-  "generated_iso": "2026-07-12T04:00:06",
+  "generated": "2026-07-12 05:00",
+  "generated_iso": "2026-07-12T05:00:06",
   "pages_url": "https://kadenzheng.github.io/harness-review",
   "poller": {
-    "at": "2026-07-12T08:00:06Z",
+    "at": "2026-07-12T09:00:06Z",
     "counts": {
       "applied": 0,
       "dup": 0,
