@@ -68,11 +68,40 @@
     "suite_ok": true
   },
   "dream": {
-    "items": [],
+    "items": [
+      {
+        "id": "dream-8733bf6db706a006065475fe",
+        "n": 1,
+        "subject_path": "runs/dream-sweep-20260716-1459.md",
+        "subject_sha256": "11b774d8990262c772ea683ad37bebd37fc24527022a5c460f6c0e363b3dc5c5",
+        "text": "Review the bound deferred item on FASRC."
+      },
+      {
+        "id": "dream-c45911dc44ce3057b98e4497",
+        "n": 1,
+        "subject_path": "runs/dream-sweep-20260716-1459.md",
+        "subject_sha256": "3de4ab40cb66bbd663bb340b1cca07c8b94593d23b2a80ae3dfd3ffe28316836",
+        "text": "Review the bound deferred item on FASRC."
+      },
+      {
+        "id": "dream-6c2e5e69b6b2abafc9489419",
+        "n": 2,
+        "subject_path": "runs/dream-sweep-20260716-1459.md",
+        "subject_sha256": "ab60c3e0b3fe9f8a2f5428c5871e9a84049c457194acec148dcd202103f6b754",
+        "text": "Review the bound deferred item on FASRC."
+      },
+      {
+        "id": "dream-c0870ac3fac2b4d93e3c43d8",
+        "n": 3,
+        "subject_path": "runs/dream-sweep-20260716-1459.md",
+        "subject_sha256": "f0f1d9d92a41527a82522624b01bf7a779226052ab102cedf9ebc81b7ae291aa",
+        "text": "Review the bound deferred item on FASRC."
+      }
+    ],
     "store": "opaque"
   },
-  "generated": "2026-07-16 15:11",
-  "generated_iso": "2026-07-16T15:11:15",
+  "generated": "2026-07-16 15:26",
+  "generated_iso": "2026-07-16T15:26:45",
   "pages_url": "https://kadenzheng.github.io/harness-review",
   "poller": {
     "at": "2026-07-16T14:13:45Z",
