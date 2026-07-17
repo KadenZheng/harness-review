@@ -73,6 +73,16 @@
       "subject_sha256": "746795638df009b9b607789e72d669bcf7e81de5b6f33ad78fc03d3d23217092",
       "target": "Review the bound candidate on FASRC before deciding.",
       "validation": ""
+    },
+    {
+      "id": "c0008",
+      "pending": false,
+      "promotion_blocker_count": 0,
+      "promotion_ready": true,
+      "slug": "c0008",
+      "status": "PROMOTED",
+      "subject_path": "runs/run-20260717-152800/candidates/c0008/candidate.md",
+      "subject_sha256": "0f000e6bf5fc7729ed7b725e5838698187772c04b7fd7548f0a6a69cac681c19"
     }
   ],
   "digest": {
@@ -85,8 +95,8 @@
     "items": [],
     "store": "opaque"
   },
-  "generated": "2026-07-17 11:24",
-  "generated_iso": "2026-07-17T11:24:13",
+  "generated": "2026-07-17 11:38",
+  "generated_iso": "2026-07-17T11:38:07",
   "pages_url": "https://kadenzheng.github.io/harness-review",
   "poller": {
     "at": "2026-07-17T08:24:29Z",
